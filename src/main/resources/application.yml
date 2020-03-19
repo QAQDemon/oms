@@ -1,0 +1,70 @@
+#配置内置tomcat服务的端口号,但是war包中不能声明
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  profiles:
+    active: dev #开发环境
+  # 热部署
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+    livereload:
+      enabled: true #浏览器自动刷新
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+  #数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oms?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+  #设置页面模板thymeleaf的属性
+  thymeleaf:
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+  #编码格式 ,解决前台到后台的中文乱码问题   request.setCharsetEnding();
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  #修改默认的静态寻址资源目录
+  resources:
+    static-locations: classpath:/templates/,classpath:/resources/,classpath:/static/
+  #静态文件请求匹配方式,表示只有静态资源的访问路径为/static/**时，才会当作静态资源处理请求
+  mvc:
+    static-path-pattern: /static/**
+  #文件上传限制
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+# mybatis配置短语和映射文件
+mybatis:
+  #指定bean所在包
+  type-aliases-package: com.neu.edu.oms.entity
+  #指定映射文件的路径 ,boot会扫描该文件夹 ,将所有的mapper文件生成bean对象,注册的springboot中
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰uName自动映射到u_name
+    map-underscore-to-camel-case: true
+#打印sql
+logging:
+  level:
+    com.neu.edu.oms.dao: debug
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
