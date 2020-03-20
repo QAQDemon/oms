@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.TeacherClassMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.TeacherClass">
+    <constructor>
+      <idArg column="tc_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="class_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="teacher_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subject_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subject_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="teach_year" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="semester" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    tc_id, class_id, teacher_id, subject_id, subject_name, teach_year, semester, comment, 
+    reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher_class
+    where tc_id = #{tcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher_class
+    where tc_id = #{tcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.TeacherClass">
+    insert into teacher_class (tc_id, class_id, teacher_id, 
+      subject_id, subject_name, teach_year, 
+      semester, comment, reserve1, 
+      reserve2)
+    values (#{tcId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
+      #{subjectId,jdbcType=INTEGER}, #{subjectName,jdbcType=VARCHAR}, #{teachYear,jdbcType=INTEGER}, 
+      #{semester,jdbcType=TINYINT}, #{comment,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.TeacherClass">
+    insert into teacher_class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tcId != null">
+        tc_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="subjectName != null">
+        subject_name,
+      </if>
+      <if test="teachYear != null">
+        teach_year,
+      </if>
+      <if test="semester != null">
+        semester,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tcId != null">
+        #{tcId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="teachYear != null">
+        #{teachYear,jdbcType=INTEGER},
+      </if>
+      <if test="semester != null">
+        #{semester,jdbcType=TINYINT},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.TeacherClass">
+    update teacher_class
+    <set>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null">
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="teachYear != null">
+        teach_year = #{teachYear,jdbcType=INTEGER},
+      </if>
+      <if test="semester != null">
+        semester = #{semester,jdbcType=TINYINT},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tc_id = #{tcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.TeacherClass">
+    update teacher_class
+    set class_id = #{classId,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      subject_id = #{subjectId,jdbcType=INTEGER},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      teach_year = #{teachYear,jdbcType=INTEGER},
+      semester = #{semester,jdbcType=TINYINT},
+      comment = #{comment,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where tc_id = #{tcId,jdbcType=INTEGER}
+  </update>
+</mapper>

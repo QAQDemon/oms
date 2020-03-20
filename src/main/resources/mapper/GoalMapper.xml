@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.GoalMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.Goal">
+    <constructor>
+      <idArg column="goal_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subject_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subject_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goal_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    goal_id, subject_id, subject_name, goal_name, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goal
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goal
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.Goal">
+    insert into goal (goal_id, subject_id, subject_name, 
+      goal_name, reserve1, reserve2
+      )
+    values (#{goalId,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}, #{subjectName,jdbcType=VARCHAR}, 
+      #{goalName,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.Goal">
+    insert into goal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goalId != null">
+        goal_id,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="subjectName != null">
+        subject_name,
+      </if>
+      <if test="goalName != null">
+        goal_name,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goalId != null">
+        #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="goalName != null">
+        #{goalName,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.Goal">
+    update goal
+    <set>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectName != null">
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="goalName != null">
+        goal_name = #{goalName,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.Goal">
+    update goal
+    set subject_id = #{subjectId,jdbcType=INTEGER},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      goal_name = #{goalName,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </update>
+</mapper>

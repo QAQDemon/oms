@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.AnswerSheetMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.AnswerSheet">
+    <constructor>
+      <idArg column="answer_sheet_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="administrator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="answer_sheet_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="establish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="obj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="subj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="adopt_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    answer_sheet_id, administrator_id, answer_sheet_name, establish_time, obj_num, subj_num, 
+    adopt_num, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from answer_sheet
+    where answer_sheet_id = #{answerSheetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from answer_sheet
+    where answer_sheet_id = #{answerSheetId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.AnswerSheet">
+    insert into answer_sheet (answer_sheet_id, administrator_id, answer_sheet_name, 
+      establish_time, obj_num, subj_num, 
+      adopt_num, reserve1, reserve2
+      )
+    values (#{answerSheetId,jdbcType=INTEGER}, #{administratorId,jdbcType=INTEGER}, #{answerSheetName,jdbcType=VARCHAR}, 
+      #{establishTime,jdbcType=TIMESTAMP}, #{objNum,jdbcType=SMALLINT}, #{subjNum,jdbcType=SMALLINT}, 
+      #{adoptNum,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.AnswerSheet">
+    insert into answer_sheet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="answerSheetId != null">
+        answer_sheet_id,
+      </if>
+      <if test="administratorId != null">
+        administrator_id,
+      </if>
+      <if test="answerSheetName != null">
+        answer_sheet_name,
+      </if>
+      <if test="establishTime != null">
+        establish_time,
+      </if>
+      <if test="objNum != null">
+        obj_num,
+      </if>
+      <if test="subjNum != null">
+        subj_num,
+      </if>
+      <if test="adoptNum != null">
+        adopt_num,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="answerSheetId != null">
+        #{answerSheetId,jdbcType=INTEGER},
+      </if>
+      <if test="administratorId != null">
+        #{administratorId,jdbcType=INTEGER},
+      </if>
+      <if test="answerSheetName != null">
+        #{answerSheetName,jdbcType=VARCHAR},
+      </if>
+      <if test="establishTime != null">
+        #{establishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objNum != null">
+        #{objNum,jdbcType=SMALLINT},
+      </if>
+      <if test="subjNum != null">
+        #{subjNum,jdbcType=SMALLINT},
+      </if>
+      <if test="adoptNum != null">
+        #{adoptNum,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.AnswerSheet">
+    update answer_sheet
+    <set>
+      <if test="administratorId != null">
+        administrator_id = #{administratorId,jdbcType=INTEGER},
+      </if>
+      <if test="answerSheetName != null">
+        answer_sheet_name = #{answerSheetName,jdbcType=VARCHAR},
+      </if>
+      <if test="establishTime != null">
+        establish_time = #{establishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objNum != null">
+        obj_num = #{objNum,jdbcType=SMALLINT},
+      </if>
+      <if test="subjNum != null">
+        subj_num = #{subjNum,jdbcType=SMALLINT},
+      </if>
+      <if test="adoptNum != null">
+        adopt_num = #{adoptNum,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where answer_sheet_id = #{answerSheetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.AnswerSheet">
+    update answer_sheet
+    set administrator_id = #{administratorId,jdbcType=INTEGER},
+      answer_sheet_name = #{answerSheetName,jdbcType=VARCHAR},
+      establish_time = #{establishTime,jdbcType=TIMESTAMP},
+      obj_num = #{objNum,jdbcType=SMALLINT},
+      subj_num = #{subjNum,jdbcType=SMALLINT},
+      adopt_num = #{adoptNum,jdbcType=INTEGER},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where answer_sheet_id = #{answerSheetId,jdbcType=INTEGER}
+  </update>
+</mapper>

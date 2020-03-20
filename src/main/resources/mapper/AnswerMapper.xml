@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.AnswerMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.Answer">
+    <constructor>
+      <idArg column="answer_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="answersheet_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="administrator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="subject_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="answer_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="establish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="exam_time" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="obj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="subj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="is_assign" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    answer_id, answersheet_id, administrator_id, subject_id, answer_name, establish_time, 
+    start_time, exam_time, obj_num, subj_num, is_assign, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.Answer">
+    insert into answer (answer_id, answersheet_id, administrator_id, 
+      subject_id, answer_name, establish_time, 
+      start_time, exam_time, obj_num, 
+      subj_num, is_assign, reserve1, 
+      reserve2)
+    values (#{answerId,jdbcType=INTEGER}, #{answersheetId,jdbcType=INTEGER}, #{administratorId,jdbcType=INTEGER}, 
+      #{subjectId,jdbcType=INTEGER}, #{answerName,jdbcType=VARCHAR}, #{establishTime,jdbcType=TIMESTAMP}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{examTime,jdbcType=SMALLINT}, #{objNum,jdbcType=SMALLINT}, 
+      #{subjNum,jdbcType=SMALLINT}, #{isAssign,jdbcType=TINYINT}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.Answer">
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="answersheetId != null">
+        answersheet_id,
+      </if>
+      <if test="administratorId != null">
+        administrator_id,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="answerName != null">
+        answer_name,
+      </if>
+      <if test="establishTime != null">
+        establish_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="examTime != null">
+        exam_time,
+      </if>
+      <if test="objNum != null">
+        obj_num,
+      </if>
+      <if test="subjNum != null">
+        subj_num,
+      </if>
+      <if test="isAssign != null">
+        is_assign,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="answersheetId != null">
+        #{answersheetId,jdbcType=INTEGER},
+      </if>
+      <if test="administratorId != null">
+        #{administratorId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="answerName != null">
+        #{answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="establishTime != null">
+        #{establishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examTime != null">
+        #{examTime,jdbcType=SMALLINT},
+      </if>
+      <if test="objNum != null">
+        #{objNum,jdbcType=SMALLINT},
+      </if>
+      <if test="subjNum != null">
+        #{subjNum,jdbcType=SMALLINT},
+      </if>
+      <if test="isAssign != null">
+        #{isAssign,jdbcType=TINYINT},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.Answer">
+    update answer
+    <set>
+      <if test="answersheetId != null">
+        answersheet_id = #{answersheetId,jdbcType=INTEGER},
+      </if>
+      <if test="administratorId != null">
+        administrator_id = #{administratorId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="answerName != null">
+        answer_name = #{answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="establishTime != null">
+        establish_time = #{establishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examTime != null">
+        exam_time = #{examTime,jdbcType=SMALLINT},
+      </if>
+      <if test="objNum != null">
+        obj_num = #{objNum,jdbcType=SMALLINT},
+      </if>
+      <if test="subjNum != null">
+        subj_num = #{subjNum,jdbcType=SMALLINT},
+      </if>
+      <if test="isAssign != null">
+        is_assign = #{isAssign,jdbcType=TINYINT},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.Answer">
+    update answer
+    set answersheet_id = #{answersheetId,jdbcType=INTEGER},
+      administrator_id = #{administratorId,jdbcType=INTEGER},
+      subject_id = #{subjectId,jdbcType=INTEGER},
+      answer_name = #{answerName,jdbcType=VARCHAR},
+      establish_time = #{establishTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      exam_time = #{examTime,jdbcType=SMALLINT},
+      obj_num = #{objNum,jdbcType=SMALLINT},
+      subj_num = #{subjNum,jdbcType=SMALLINT},
+      is_assign = #{isAssign,jdbcType=TINYINT},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+</mapper>

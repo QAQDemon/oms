@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.MarkArrangeMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.MarkArrange">
+    <constructor>
+      <idArg column="mark_arrange_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="teacher_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="paper_scan_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="question_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="photo_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="photo_prefix" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="answer_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="score_get" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="is_mark" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    mark_arrange_id, teacher_id, paper_scan_id, question_num, photo_address, photo_prefix, 
+    answer_id, score_get, is_mark, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mark_arrange
+    where mark_arrange_id = #{markArrangeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mark_arrange
+    where mark_arrange_id = #{markArrangeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.MarkArrange">
+    insert into mark_arrange (mark_arrange_id, teacher_id, paper_scan_id, 
+      question_num, photo_address, photo_prefix, 
+      answer_id, score_get, is_mark, 
+      reserve1, reserve2)
+    values (#{markArrangeId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, #{paperScanId,jdbcType=INTEGER}, 
+      #{questionNum,jdbcType=SMALLINT}, #{photoAddress,jdbcType=VARCHAR}, #{photoPrefix,jdbcType=VARCHAR}, 
+      #{answerId,jdbcType=INTEGER}, #{scoreGet,jdbcType=SMALLINT}, #{isMark,jdbcType=TINYINT}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.MarkArrange">
+    insert into mark_arrange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="markArrangeId != null">
+        mark_arrange_id,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="paperScanId != null">
+        paper_scan_id,
+      </if>
+      <if test="questionNum != null">
+        question_num,
+      </if>
+      <if test="photoAddress != null">
+        photo_address,
+      </if>
+      <if test="photoPrefix != null">
+        photo_prefix,
+      </if>
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="scoreGet != null">
+        score_get,
+      </if>
+      <if test="isMark != null">
+        is_mark,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="markArrangeId != null">
+        #{markArrangeId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="paperScanId != null">
+        #{paperScanId,jdbcType=INTEGER},
+      </if>
+      <if test="questionNum != null">
+        #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="photoAddress != null">
+        #{photoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPrefix != null">
+        #{photoPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreGet != null">
+        #{scoreGet,jdbcType=SMALLINT},
+      </if>
+      <if test="isMark != null">
+        #{isMark,jdbcType=TINYINT},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.MarkArrange">
+    update mark_arrange
+    <set>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="paperScanId != null">
+        paper_scan_id = #{paperScanId,jdbcType=INTEGER},
+      </if>
+      <if test="questionNum != null">
+        question_num = #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="photoAddress != null">
+        photo_address = #{photoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPrefix != null">
+        photo_prefix = #{photoPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="answerId != null">
+        answer_id = #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreGet != null">
+        score_get = #{scoreGet,jdbcType=SMALLINT},
+      </if>
+      <if test="isMark != null">
+        is_mark = #{isMark,jdbcType=TINYINT},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mark_arrange_id = #{markArrangeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.MarkArrange">
+    update mark_arrange
+    set teacher_id = #{teacherId,jdbcType=INTEGER},
+      paper_scan_id = #{paperScanId,jdbcType=INTEGER},
+      question_num = #{questionNum,jdbcType=SMALLINT},
+      photo_address = #{photoAddress,jdbcType=VARCHAR},
+      photo_prefix = #{photoPrefix,jdbcType=VARCHAR},
+      answer_id = #{answerId,jdbcType=INTEGER},
+      score_get = #{scoreGet,jdbcType=SMALLINT},
+      is_mark = #{isMark,jdbcType=TINYINT},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where mark_arrange_id = #{markArrangeId,jdbcType=INTEGER}
+  </update>
+</mapper>

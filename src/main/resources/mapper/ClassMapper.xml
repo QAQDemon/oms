@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.ClassMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.Class">
+    <constructor>
+      <idArg column="class_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="class_year" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="class_num" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="class_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="student_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="college" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    class_id, class_year, class_num, class_name, student_num, college, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from class
+    where class_id = #{classId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from class
+    where class_id = #{classId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.Class">
+    insert into class (class_id, class_year, class_num, 
+      class_name, student_num, college, 
+      reserve1, reserve2)
+    values (#{classId,jdbcType=INTEGER}, #{classYear,jdbcType=SMALLINT}, #{classNum,jdbcType=TINYINT}, 
+      #{className,jdbcType=VARCHAR}, #{studentNum,jdbcType=SMALLINT}, #{college,jdbcType=VARCHAR}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.Class">
+    insert into class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="classYear != null">
+        class_year,
+      </if>
+      <if test="classNum != null">
+        class_num,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="studentNum != null">
+        student_num,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="classYear != null">
+        #{classYear,jdbcType=SMALLINT},
+      </if>
+      <if test="classNum != null">
+        #{classNum,jdbcType=TINYINT},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNum != null">
+        #{studentNum,jdbcType=SMALLINT},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.Class">
+    update class
+    <set>
+      <if test="classYear != null">
+        class_year = #{classYear,jdbcType=SMALLINT},
+      </if>
+      <if test="classNum != null">
+        class_num = #{classNum,jdbcType=TINYINT},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNum != null">
+        student_num = #{studentNum,jdbcType=SMALLINT},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where class_id = #{classId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.Class">
+    update class
+    set class_year = #{classYear,jdbcType=SMALLINT},
+      class_num = #{classNum,jdbcType=TINYINT},
+      class_name = #{className,jdbcType=VARCHAR},
+      student_num = #{studentNum,jdbcType=SMALLINT},
+      college = #{college,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where class_id = #{classId,jdbcType=INTEGER}
+  </update>
+</mapper>

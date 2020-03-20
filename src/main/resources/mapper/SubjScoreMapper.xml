@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.SubjScoreMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.SubjScore">
+    <constructor>
+      <idArg column="subj_score_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="paper_scan_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="score_get" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="score" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="question_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="point_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="goal_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="insert_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="mark_times" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="photo_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    subj_score_id, paper_scan_id, score_get, score, question_num, point_id, goal_id, 
+    insert_time, mark_times, photo_address, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from subj_score
+    where subj_score_id = #{subjScoreId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from subj_score
+    where subj_score_id = #{subjScoreId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.SubjScore">
+    insert into subj_score (subj_score_id, paper_scan_id, score_get, 
+      score, question_num, point_id, 
+      goal_id, insert_time, mark_times, 
+      photo_address, reserve1, reserve2
+      )
+    values (#{subjScoreId,jdbcType=INTEGER}, #{paperScanId,jdbcType=INTEGER}, #{scoreGet,jdbcType=SMALLINT}, 
+      #{score,jdbcType=SMALLINT}, #{questionNum,jdbcType=SMALLINT}, #{pointId,jdbcType=INTEGER}, 
+      #{goalId,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, #{markTimes,jdbcType=TINYINT}, 
+      #{photoAddress,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.SubjScore">
+    insert into subj_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjScoreId != null">
+        subj_score_id,
+      </if>
+      <if test="paperScanId != null">
+        paper_scan_id,
+      </if>
+      <if test="scoreGet != null">
+        score_get,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="questionNum != null">
+        question_num,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="goalId != null">
+        goal_id,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="markTimes != null">
+        mark_times,
+      </if>
+      <if test="photoAddress != null">
+        photo_address,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjScoreId != null">
+        #{subjScoreId,jdbcType=INTEGER},
+      </if>
+      <if test="paperScanId != null">
+        #{paperScanId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreGet != null">
+        #{scoreGet,jdbcType=SMALLINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="questionNum != null">
+        #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="goalId != null">
+        #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markTimes != null">
+        #{markTimes,jdbcType=TINYINT},
+      </if>
+      <if test="photoAddress != null">
+        #{photoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.SubjScore">
+    update subj_score
+    <set>
+      <if test="paperScanId != null">
+        paper_scan_id = #{paperScanId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreGet != null">
+        score_get = #{scoreGet,jdbcType=SMALLINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="questionNum != null">
+        question_num = #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="goalId != null">
+        goal_id = #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markTimes != null">
+        mark_times = #{markTimes,jdbcType=TINYINT},
+      </if>
+      <if test="photoAddress != null">
+        photo_address = #{photoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where subj_score_id = #{subjScoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.SubjScore">
+    update subj_score
+    set paper_scan_id = #{paperScanId,jdbcType=INTEGER},
+      score_get = #{scoreGet,jdbcType=SMALLINT},
+      score = #{score,jdbcType=SMALLINT},
+      question_num = #{questionNum,jdbcType=SMALLINT},
+      point_id = #{pointId,jdbcType=INTEGER},
+      goal_id = #{goalId,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      mark_times = #{markTimes,jdbcType=TINYINT},
+      photo_address = #{photoAddress,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where subj_score_id = #{subjScoreId,jdbcType=INTEGER}
+  </update>
+</mapper>

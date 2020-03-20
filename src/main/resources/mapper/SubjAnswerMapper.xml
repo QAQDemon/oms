@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.edu.oms.dao.SubjAnswerMapper">
+  <resultMap id="BaseResultMap" type="com.neu.edu.oms.entity.SubjAnswer">
+    <constructor>
+      <idArg column="subj_answer_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="answer_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="point_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="goal_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="question_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="score" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="point_description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="point_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    subj_answer_id, answer_id, point_id, goal_id, question_num, score, point_description, 
+    point_photo, reserve1, reserve2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from subj_answer
+    where subj_answer_id = #{subjAnswerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from subj_answer
+    where subj_answer_id = #{subjAnswerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.edu.oms.entity.SubjAnswer">
+    insert into subj_answer (subj_answer_id, answer_id, point_id, 
+      goal_id, question_num, score, 
+      point_description, point_photo, reserve1, 
+      reserve2)
+    values (#{subjAnswerId,jdbcType=INTEGER}, #{answerId,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, 
+      #{goalId,jdbcType=INTEGER}, #{questionNum,jdbcType=SMALLINT}, #{score,jdbcType=SMALLINT}, 
+      #{pointDescription,jdbcType=VARCHAR}, #{pointPhoto,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.SubjAnswer">
+    insert into subj_answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjAnswerId != null">
+        subj_answer_id,
+      </if>
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="goalId != null">
+        goal_id,
+      </if>
+      <if test="questionNum != null">
+        question_num,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="pointDescription != null">
+        point_description,
+      </if>
+      <if test="pointPhoto != null">
+        point_photo,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjAnswerId != null">
+        #{subjAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="goalId != null">
+        #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="questionNum != null">
+        #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="pointDescription != null">
+        #{pointDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="pointPhoto != null">
+        #{pointPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.edu.oms.entity.SubjAnswer">
+    update subj_answer
+    <set>
+      <if test="answerId != null">
+        answer_id = #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="goalId != null">
+        goal_id = #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="questionNum != null">
+        question_num = #{questionNum,jdbcType=SMALLINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="pointDescription != null">
+        point_description = #{pointDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="pointPhoto != null">
+        point_photo = #{pointPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where subj_answer_id = #{subjAnswerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.edu.oms.entity.SubjAnswer">
+    update subj_answer
+    set answer_id = #{answerId,jdbcType=INTEGER},
+      point_id = #{pointId,jdbcType=INTEGER},
+      goal_id = #{goalId,jdbcType=INTEGER},
+      question_num = #{questionNum,jdbcType=SMALLINT},
+      score = #{score,jdbcType=SMALLINT},
+      point_description = #{pointDescription,jdbcType=VARCHAR},
+      point_photo = #{pointPhoto,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where subj_answer_id = #{subjAnswerId,jdbcType=INTEGER}
+  </update>
+</mapper>
