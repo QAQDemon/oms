@@ -73,6 +73,25 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.10</version>
         </dependency>
+        <!-- OpenCV 图像处理-->
+        <dependency>
+            <groupId>org</groupId>
+            <artifactId>opencv</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}\src\main\resources\lib\opencv_400.jar</systemPath>
+        </dependency>
+        <!-- dom4j xml文件操作 -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <!-- gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
     </dependencies>
 
     <build>

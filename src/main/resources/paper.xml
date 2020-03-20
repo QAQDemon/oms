@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<papers>
+	<paper id="000001">
+		<physicalInfo>
+			<!--cm-->
+			<width>42</width>
+			<height>29.7</height>
+			<unit>
+				<width>0.31</width>
+				<height>0.17</height>
+			</unit>
+		</physicalInfo>
+		<!--同步头坐标，每页4个-->
+		<calibrations>
+			<group id="01">
+				<coordinate1 row="1" column="2"/>
+				<coordinate2 row="1" column="48"/>
+				<coordinate3 row="81" column="2"/>
+				<coordinate4 row="81" column="62"/>
+			</group>
+			<group id="02">
+				<coordinate1 row="1" column="11"/>
+				<coordinate2 row="1" column="30"/>
+				<coordinate3 row="81" column="11"/>
+				<coordinate4 row="81" column="62"/>
+			</group>
+		</calibrations>
+		<!--AB卷标志的坐标-->
+		<type>
+			<firstCoordinate row="8" column="6"/>
+			<lastCoordinate row="10" column="8"/>
+		</type>
+
+		<university>
+			<content>东北大学</content>
+			<coordinates>
+				<firstCoordinate row="2" column="1"/>
+				<lastCoordinate row="4" column="4"/>
+			</coordinates>
+		</university>
+		<year>
+			<content>2019-2020学年</content>
+			<coordinates>
+				<firstCoordinate row="2" column="4"/>
+				<lastCoordinate row="4" column="9"/>
+			</coordinates>
+		</year>
+		<term>
+			<content>秋季学期</content>
+			<coordinates>
+				<firstCoordinate row="4" column="3"/>
+				<lastCoordinate row="6" column="7"/>
+			</coordinates>
+		</term>
+		<subject>
+			<content>概率论与数理统计（闭卷）</content>
+			<coordinates>
+				<firstCoordinate row="6" column="1"/>
+				<lastCoordinate row="8" column="9"/>
+			</coordinates>
+		</subject>
+
+		<studentInfo>
+			<name>
+				<coordinates>
+					<firstCoordinate row="11" column="3"/>
+					<lastCoordinate row="13" column="9"/>
+				</coordinates>
+			</name>
+			<class>
+				<coordinates>
+					<firstCoordinate row="13" column="3"/>
+					<lastCoordinate row="15" column="9"/>
+				</coordinates>
+			</class>
+			<examinationRoom>
+				<coordinates>
+					<firstCoordinate row="15" column="3"/>
+					<lastCoordinate row="17" column="9"/>
+				</coordinates>
+			</examinationRoom>
+			<studentID>
+				<coordinates>
+					<firstCoordinate row="19" column="1"/>
+					<lastCoordinate row="30" column="9"/>
+				</coordinates>
+			</studentID>
+		</studentInfo>
+
+		<!--AB卷，A卷选项横向分布，B卷选项竖向分布-->
+		<objectiveQuestions type="A">
+			<!--A卷选择题。单s多选m；5个一组，向下扩展d4；4个横向选项r4-->
+			<choiceQuestions>
+				<group id="01">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="34" column="2"/>
+						<lastCoordinate row="39" column="6"/>
+					</coordinates>
+				</group>
+				<group id="02">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="40" column="2"/>
+						<lastCoordinate row="45" column="6"/>
+					</coordinates>
+				</group>
+				<group id="03">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="46" column="2"/>
+						<lastCoordinate row="51" column="6"/>
+					</coordinates>
+				</group>
+				<group id="04">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="52" column="2"/>
+						<lastCoordinate row="57" column="6"/>
+					</coordinates>
+				</group>
+				<group id="05">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="58" column="2"/>
+						<lastCoordinate row="63" column="6"/>
+					</coordinates>
+				</group>
+				<group id="06">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="64" column="2"/>
+						<lastCoordinate row="69" column="6"/>
+					</coordinates>
+				</group>
+				<group id="07">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="70" column="2"/>
+						<lastCoordinate row="75" column="6"/>
+					</coordinates>
+				</group>
+				<group id="08">
+					<type>s</type>
+					<extend>d4</extend>
+					<choice>r4</choice>
+					<coordinates>
+						<firstCoordinate row="76" column="2"/>
+						<lastCoordinate row="81" column="6"/>
+					</coordinates>
+				</group>
+			</choiceQuestions>
+			<!--A卷判断题。5个一组，向下扩展d4；2个横向选项r2-->
+			<judgementQuestions>
+				<group id="01">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="34" column="7"/>
+						<lastCoordinate row="39" column="9"/>
+					</coordinates>
+				</group>
+				<group id="02">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="40" column="7"/>
+						<lastCoordinate row="45" column="9"/>
+					</coordinates>
+				</group>
+				<group id="03">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="46" column="7"/>
+						<lastCoordinate row="51" column="9"/>
+					</coordinates>
+				</group>
+				<group id="04">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="52" column="7"/>
+						<lastCoordinate row="57" column="9"/>
+					</coordinates>
+				</group>
+				<group id="05">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="58" column="7"/>
+						<lastCoordinate row="63" column="9"/>
+					</coordinates>
+				</group>
+				<group id="06">
+					<extend>d4</extend>
+					<choice>r2</choice>
+					<coordinates>
+						<firstCoordinate row="64" column="7"/>
+						<lastCoordinate row="69" column="9"/>
+					</coordinates>
+				</group>
+			</judgementQuestions>
+		</objectiveQuestions>
+		<objectiveQuestions type="B">
+			<!--B卷选择题。单s多选m；8个一组，向右扩展r7；4个竖向选项d4-->
+			<choiceQuestions>
+				<group id="01">
+					<type>s</type>
+					<extend>r7</extend>
+					<choice>d4</choice>
+					<coordinates>
+						<firstCoordinate row="35" column="1"/>
+						<lastCoordinate row="39" column="9"/>
+					</coordinates>
+				</group>
+				<group id="02">
+					<type>s</type>
+					<extend>r7</extend>
+					<choice>d4</choice>
+					<coordinates>
+						<firstCoordinate row="41" column="1"/>
+						<lastCoordinate row="45" column="9"/>
+					</coordinates>
+				</group>
+				<group id="03">
+					<type>s</type>
+					<extend>r7</extend>
+					<choice>d4</choice>
+					<coordinates>
+						<firstCoordinate row="47" column="1"/>
+						<lastCoordinate row="51" column="9"/>
+					</coordinates>
+				</group>
+				<group id="04">
+					<type>s</type>
+					<extend>r7</extend>
+					<choice>d4</choice>
+					<coordinates>
+						<firstCoordinate row="53" column="1"/>
+						<lastCoordinate row="57" column="9"/>
+					</coordinates>
+				</group>
+				<group id="05">
+					<type>s</type>
+					<extend>r7</extend>
+					<choice>d4</choice>
+					<coordinates>
+						<firstCoordinate row="59" column="1"/>
+						<lastCoordinate row="63" column="9"/>
+					</coordinates>
+				</group>
+			</choiceQuestions>
+			<!--B卷判断题。8个一组，向右扩展r7；2个竖向选项d2-->
+			<judgementQuestions>
+				<group id="01">
+					<extend>r7</extend>
+					<choice>d2</choice>
+					<coordinates>
+						<firstCoordinate row="66" column="1"/>
+						<lastCoordinate row="68" column="9"/>
+					</coordinates>
+				</group>
+				<group id="02">
+					<extend>r7</extend>
+					<choice>d2</choice>
+					<coordinates>
+						<firstCoordinate row="70" column="1"/>
+						<lastCoordinate row="72" column="9"/>
+					</coordinates>
+				</group>
+				<group id="03">
+					<extend>r7</extend>
+					<choice>d2</choice>
+					<coordinates>
+						<firstCoordinate row="74" column="1"/>
+						<lastCoordinate row="76" column="9"/>
+					</coordinates>
+				</group>
+				<group id="04">
+					<extend>r5</extend>
+					<choice>d2</choice>
+					<coordinates>
+						<firstCoordinate row="78" column="1"/>
+						<lastCoordinate row="80" column="7"/>
+					</coordinates>
+				</group>
+			</judgementQuestions>
+		</objectiveQuestions>
+
+		<!--客观题，有页数-->
+		<subjectiveQuestions>
+			<group id="01">
+				<page>1</page>
+				<coordinates>
+					<firstCoordinate row="4" column="10"/>
+					<lastCoordinate row="81" column="28"/>
+				</coordinates>
+			</group>
+			<group id="02">
+				<page>1</page>
+				<coordinates>
+					<firstCoordinate row="4" column="28"/>
+					<lastCoordinate row="81" column="46"/>
+				</coordinates>
+			</group>
+			<group id="03">
+				<page>1</page>
+				<coordinates>
+					<firstCoordinate row="4" column="46"/>
+					<lastCoordinate row="81" column="64"/>
+				</coordinates>
+			</group>
+			<group id="04">
+				<page>2</page>
+				<coordinates>
+					<firstCoordinate row="4" column="10"/>
+					<lastCoordinate row="81" column="28"/>
+				</coordinates>
+			</group>
+			<group id="05">
+				<page>2</page>
+				<coordinates>
+					<firstCoordinate row="4" column="28"/>
+					<lastCoordinate row="81" column="46"/>
+				</coordinates>
+			</group>
+			<group id="06">
+				<page>2</page>
+				<coordinates>
+					<firstCoordinate row="4" column="46"/>
+					<lastCoordinate row="81" column="64"/>
+				</coordinates>
+			</group>
+		</subjectiveQuestions>
+	</paper>
+</papers>

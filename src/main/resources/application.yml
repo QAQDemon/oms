@@ -25,7 +25,7 @@ spring:
     cache: false
     suffix: .html
     encoding: UTF-8
-    mode: HTML5
+    mode: HTML
     prefix: classpath:/templates/
   #编码格式 ,解决前台到后台的中文乱码问题   request.setCharsetEnding();
   http:
