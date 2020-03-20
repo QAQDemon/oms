@@ -1,21 +1,12 @@
 package com.neu.edu.oms.utils.imageUtils;
 
 import com.neu.edu.oms.utils.PaperXMLReader;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.ml.KNearest;
-import org.opencv.ml.Ml;
-import org.opencv.utils.Converters;
 
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SegmentUtils {
     private int[] startIndexs;
@@ -24,10 +15,10 @@ public class SegmentUtils {
     private String type;//A B
     private PaperXMLReader paperXMLReader;
     //像素坐标
-    double xLength;
-    double yLength;
-    double x0;
-    double y0;
+    private double xLength;
+    private double yLength;
+    private double x0;
+    private double y0;
 
     /*
      * @Description 初始化，将试卷图片调整为正，上短下长

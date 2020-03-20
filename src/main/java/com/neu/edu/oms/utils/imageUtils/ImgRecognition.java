@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImgRecognition {
+    private final static String fileNamePrefix="C:\\Users\\demon\\Desktop\\work2\\"; //todo 根据服务器修改
 
     /*
-     * @Description 识别图片是A还是B
+     * @Description 识别图片是A还是B,knn算法
      * @Param [feature]
      * @return int 65A 66B
      **/
@@ -26,7 +27,7 @@ public class ImgRecognition {
         for (int k = 0; k < 2; k++) {
             //读取所有图片名
             ArrayList<String> files = new ArrayList< >();
-            String fileName="C:\\Users\\demon\\Desktop\\work2\\";
+            String fileName=fileNamePrefix;
             if (k == 0)
                 fileName += "A";
             else fileName += "B";
