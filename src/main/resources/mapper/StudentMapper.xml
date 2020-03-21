@@ -127,4 +127,5 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
+
 </mapper>

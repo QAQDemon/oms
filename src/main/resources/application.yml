@@ -19,14 +19,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/oms?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     username: root
-    password: 123456
+    password: HAIYouWe0315i
   #设置页面模板thymeleaf的属性
   thymeleaf:
     cache: false
     suffix: .html
     encoding: UTF-8
     mode: HTML
-    prefix: classpath:/templates/
+    prefix: classpath:/static/
+    servlet:
+      content-type: text/html
   #编码格式 ,解决前台到后台的中文乱码问题   request.setCharsetEnding();
   http:
     encoding:
