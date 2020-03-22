@@ -24,8 +24,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.neu.edu.config"))
+                //扫描路径
+                .apis(RequestHandlerSelectors.basePackage("com.neu.edu.oms.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
