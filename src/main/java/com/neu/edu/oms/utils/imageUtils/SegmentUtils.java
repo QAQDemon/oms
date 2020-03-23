@@ -258,7 +258,7 @@ public class SegmentUtils {
         Imgcodecs.imwrite("D:/jpg/2.jpg", mat);
         int[] index=rectifyUtils.getSynchronizationHead(100, 40);
         Mat rot = rectifyUtils.getSrc();
-        SegmentUtils segmentUtils = new SegmentUtils(rot,index,"src/main/resources/paper.xml","000001");
+        SegmentUtils segmentUtils = new SegmentUtils(rot,index,"src/main/resources/paperTemplate.xml","000001");
         segmentUtils.slipAndJudgeTypeImg();
         segmentUtils.slipAndScanQuestionImg(1);
         segmentUtils.slipAndScanQuestionImg(2);
