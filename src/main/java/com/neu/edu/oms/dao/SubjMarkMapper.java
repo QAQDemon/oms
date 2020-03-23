@@ -1,7 +1,9 @@
 package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.SubjMark;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface SubjMarkMapper {
     int deleteByPrimaryKey(Integer subjMarkId);
 

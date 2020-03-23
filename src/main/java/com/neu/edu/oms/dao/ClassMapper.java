@@ -1,7 +1,9 @@
 package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.Class;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ClassMapper {
     int deleteByPrimaryKey(Integer classId);
 
