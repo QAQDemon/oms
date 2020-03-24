@@ -1,37 +1,80 @@
 package com.neu.edu.oms.controller;
 
+import com.google.gson.Gson;
+import com.neu.edu.oms.service.MakeTemplateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.dom4j.DocumentException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
+import javax.annotation.Resource;
 
 @Api(tags={"模板制作"})
 @RestController
 public class MakeTemplateController {
+    @Resource
+    MakeTemplateService makeTemplateService;
 
+    private final static String PAPER_TEMPLATE_PATH="src/main/resources/paperTemplate.xml";
+    private static int updateFlag=0;//0表示无人在更新 1表示有人正在更新
+
+    /*
+     * @Description 接受上传的excel文件并保存到本地//TODO json待定 重复文件的问题，删除没写
+     * @Param [excelFile, json]
+     * @return java.lang.String
+     **/
     @ApiOperation(value = "上传excel", notes = "")
     @RequestMapping(value={"/makeTemplate/uploadExcel"},method = RequestMethod.POST)
     public String uploadExcel(@ApiParam(required = true,name="excelFile",value="文件") @RequestParam(value = "excelFile") MultipartFile excelFile,
                               @ApiParam(required = true,name="json",value="")@RequestParam(value = "json") String json){
         //保存到本地
-        if (excelFile.isEmpty()) {
-            return "false";
-        }
-        String fileName = excelFile.getOriginalFilename();
-        File dest = new File("D://test.xlsx");
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
-        try {
-            excelFile.transferTo(dest); // 保存文件
-            return "true";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "false";
-        }
+        makeTemplateService.saveExcelFile(excelFile,"D://test.xlsx");
+        return "{msg:1}";
+    }
 
+    /*
+     * @Description 获得答题卡模板内容
+     * @Param []
+     * @return java.lang.String 空字符串为异常
+     **/
+    @ApiOperation(value = "获得答题卡模板", notes = "")
+    @RequestMapping(value={"/makeTemplate/getPaperTemplate"},method = RequestMethod.POST)
+    public String getPaperTemplate(){
+        String res;
+        try{
+            res=makeTemplateService.getXMLEncode(PAPER_TEMPLATE_PATH);
+        }catch (DocumentException e){//路径错误
+            return "";
+        }
+        return res;
+    }
+
+    /*
+     * @Description 判断能有更新xml文件，同时只能一人更新
+     * @Param []
+     * @return java.lang.String 1可以 0不能
+     **/
+    @ApiOperation(value = "能否更新答题卡模板", notes = "")
+    @RequestMapping(value={"/makeTemplate/canUpdatePaperTemplate"},method = RequestMethod.POST)
+    public String canUpdatePaperTemplate(){
+        if (updateFlag == 0) {
+            updateFlag=1;//可以更新，置1
+            return "{msg:1}";
+        }
+        return "{msg:0}";
+    }
+
+    /*
+     * @Description 更新答题卡模板
+     * @Param [content]
+     * @return java.lang.String
+     **/
+    @ApiOperation(value = "更新答题卡模板", notes = "")
+    @RequestMapping(value={"/makeTemplate/updatePaperTemplate"},method = RequestMethod.POST)
+    public String updatePaperTemplate(@ApiParam(required = true,name="content",value="字符串")@RequestParam(value = "content") String content){
+        makeTemplateService.saveXML(PAPER_TEMPLATE_PATH,content);
+        updateFlag=0;//更新结束 置0
+        return "{msg:1}";
     }
 }

@@ -8,23 +8,31 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+/*
+ * @Description 试卷模板xml文件的读取器
+ **/
 public class PaperXMLReader {
     private Element root;
     private Element paper;
     /*
      * @Description 读取xml文件并产生根节点
      * @Param [xmlName文件名]
-     * @return 
+     * @return
      **/
-    public PaperXMLReader(String xmlName){
+    public PaperXMLReader(String xmlName)throws DocumentException{
         SAXReader reader = new SAXReader();
-        try {
-            Document document = reader.read(new File(xmlName));
-            root = document.getRootElement();
-            paper=null;
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
+        Document document = reader.read(new File(xmlName));
+        root = document.getRootElement();
+        paper=null;
+    }
+
+    /*
+     * @Description 将xml全部内容以字符串形式返回
+     * @Param []
+     * @return java.lang.String
+     **/
+    public String readAllAsString(){
+        return root.getDocument().asXML();
     }
 
     /*

@@ -4,6 +4,7 @@ import com.neu.edu.oms.utils.PaperXMLReader;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.dom4j.DocumentException;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -25,7 +26,7 @@ public class SegmentUtils {
      * @Param [mat图片, s扫描的4个同步头坐标,xmlName,ID试卷]
      * @return
      **/
-    public SegmentUtils(Mat mat,int[] s,String xmlName,String ID){
+    public SegmentUtils(Mat mat,int[] s,String xmlName,String ID)throws DocumentException {
         startIndexs=s;
         src=mat;
         paperXMLReader = new PaperXMLReader(xmlName);
@@ -258,7 +259,12 @@ public class SegmentUtils {
         Imgcodecs.imwrite("D:/jpg/2.jpg", mat);
         int[] index=rectifyUtils.getSynchronizationHead(100, 40);
         Mat rot = rectifyUtils.getSrc();
-        SegmentUtils segmentUtils = new SegmentUtils(rot,index,"src/main/resources/paperTemplate.xml","000001");
+        SegmentUtils segmentUtils = null;
+        try {
+            segmentUtils = new SegmentUtils(rot,index,"src/main/resources/paperTemplate.xml","000001");
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
         segmentUtils.slipAndJudgeTypeImg();
         segmentUtils.slipAndScanQuestionImg(1);
         segmentUtils.slipAndScanQuestionImg(2);
