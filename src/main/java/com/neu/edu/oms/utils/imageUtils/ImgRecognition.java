@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImgRecognition {
-    private final static String FILE_NAME_PREFIX="C:\\Users\\demon\\Desktop\\work2\\"; //todo 根据服务器修改
+    private final static String FILE_NAME_PREFIX="C:\\Users\\demon\\Desktop\\work2\\"; //todo 存储字符AB文件，根据服务器修改
 
     /*
      * @Description 识别图片是A还是B,knn算法

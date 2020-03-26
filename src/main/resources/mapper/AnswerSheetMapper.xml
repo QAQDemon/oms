@@ -38,7 +38,7 @@
       #{adoptNum,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.AnswerSheet">
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.AnswerSheet" useGeneratedKeys = "true" keyProperty = "answerSheetId">
     insert into answer_sheet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="answerSheetId != null">

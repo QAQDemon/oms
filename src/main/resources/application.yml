@@ -17,9 +17,9 @@ spring:
   #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/oms?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/oms?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: HAIYouWe0315i
+    password: 123456
   #设置页面模板thymeleaf的属性
   thymeleaf:
     cache: false

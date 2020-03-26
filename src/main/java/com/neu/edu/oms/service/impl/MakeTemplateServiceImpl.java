@@ -1,17 +1,25 @@
 package com.neu.edu.oms.service.impl;
 
+import com.neu.edu.oms.dao.AnswerSheetMapper;
+import com.neu.edu.oms.entity.AnswerSheet;
 import com.neu.edu.oms.service.MakeTemplateService;
 import com.neu.edu.oms.utils.Base64Util;
 import com.neu.edu.oms.utils.PaperXMLReader;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 public class MakeTemplateServiceImpl implements MakeTemplateService {
+
+    @Resource
+    AnswerSheetMapper answerSheetMapper;
 
     /*
      * @Description 保存文件到本地
@@ -62,5 +70,15 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    /*
+     * @Description 插入新的答题卡模板并返回主键id
+     * @Param [answerSheet]
+     * @return int 非0：主键id，0：失败
+     **/
+    public int setNewAnswerSheet(AnswerSheet answerSheet) {
+        answerSheet.setEstablishTime(new Date());
+        return (1==answerSheetMapper.insertSelective(answerSheet))?answerSheet.getAnswerSheetId():0;//1：成功，返回主键  0：失败，返回0
     }
 }
