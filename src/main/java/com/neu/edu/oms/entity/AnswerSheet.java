@@ -17,11 +17,11 @@ public class AnswerSheet {
 
     private Integer adoptNum;
 
-    private String reserve1;
+    private Short isDeleted;
 
     private String reserve2;
 
-    public AnswerSheet(Integer answerSheetId, Integer administratorId, String answerSheetName, Date establishTime, Short objNum, Short subjNum, Integer adoptNum, String reserve1, String reserve2) {
+    public AnswerSheet(Integer answerSheetId, Integer administratorId, String answerSheetName, Date establishTime, Short objNum, Short subjNum, Integer adoptNum, Short isDeleted, String reserve2) {
         this.answerSheetId = answerSheetId;
         this.administratorId = administratorId;
         this.answerSheetName = answerSheetName;
@@ -29,7 +29,7 @@ public class AnswerSheet {
         this.objNum = objNum;
         this.subjNum = subjNum;
         this.adoptNum = adoptNum;
-        this.reserve1 = reserve1;
+        this.isDeleted = isDeleted;
         this.reserve2 = reserve2;
     }
 
@@ -93,12 +93,12 @@ public class AnswerSheet {
         this.adoptNum = adoptNum;
     }
 
-    public String getReserve1() {
-        return reserve1;
+    public Short getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setReserve1(String reserve1) {
-        this.reserve1 = reserve1 == null ? null : reserve1.trim();
+    public void setIsDeleted(Short isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getReserve2() {

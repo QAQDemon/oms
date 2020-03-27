@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MakeTemplateServiceImpl implements MakeTemplateService {
@@ -80,5 +81,34 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
     public int setNewAnswerSheet(AnswerSheet answerSheet) {
         answerSheet.setEstablishTime(new Date());
         return (1==answerSheetMapper.insertSelective(answerSheet))?answerSheet.getAnswerSheetId():0;//1：成功，返回主键  0：失败，返回0
+    }
+
+    /*
+     * @Description 删除选中的答题卡模板，根据采用数判断是否可删;还要删除对应AB卷Excel文件
+     * @Param [answerSheetId,directory excel文件目录]
+     * @return java.lang.Boolean
+     **/
+    public Boolean deleteAnswerSheet(int answerSheetId,String directory){
+        AnswerSheet answerSheet=answerSheetMapper.selectByPrimaryKey(answerSheetId);
+        if(0!=answerSheet.getAdoptNum())//使用过则不能删除
+            return false;
+        if(1==answerSheet.getIsDeleted())//已删除
+            return true;
+        //删除数据库
+        answerSheet.setIsDeleted((short)1);
+        answerSheetMapper.updateByPrimaryKeySelective(answerSheet);
+        //删除文件
+        new File(directory+answerSheetId+"_A.xlsx").delete();
+        new File(directory+answerSheetId+"_B.xlsx").delete();
+        return true;
+    }
+
+    /*
+     * @Description 获得所有可用答题卡模板
+     * @Param []
+     * @return java.util.List<com.neu.edu.oms.entity.AnswerSheet>
+     **/
+    public List<AnswerSheet> getAnswerSheetList(){
+        return answerSheetMapper.selectExceptDeleted();
     }
 }

@@ -10,14 +10,20 @@
       <arg column="obj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="subj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="adopt_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_deleted" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     answer_sheet_id, administrator_id, answer_sheet_name, establish_time, obj_num, subj_num, 
-    adopt_num, reserve1, reserve2
+    adopt_num, is_deleted, reserve2
   </sql>
+
+  <select id="selectExceptDeleted" resultType="AnswerSheet">
+    select * from answer_sheet
+    where is_deleted!=1
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -31,14 +37,14 @@
   <insert id="insert" parameterType="com.neu.edu.oms.entity.AnswerSheet">
     insert into answer_sheet (answer_sheet_id, administrator_id, answer_sheet_name, 
       establish_time, obj_num, subj_num, 
-      adopt_num, reserve1, reserve2
+      adopt_num, is_deleted, reserve2
       )
     values (#{answerSheetId,jdbcType=INTEGER}, #{administratorId,jdbcType=INTEGER}, #{answerSheetName,jdbcType=VARCHAR}, 
       #{establishTime,jdbcType=TIMESTAMP}, #{objNum,jdbcType=SMALLINT}, #{subjNum,jdbcType=SMALLINT}, 
-      #{adoptNum,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
+      #{adoptNum,jdbcType=INTEGER}, #{isDeleted,jdbcType=SMALLINT}, #{reserve2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.AnswerSheet" useGeneratedKeys = "true" keyProperty = "answerSheetId">
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.AnswerSheet"  useGeneratedKeys = "true" keyProperty = "answerSheetId">
     insert into answer_sheet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="answerSheetId != null">
@@ -62,8 +68,8 @@
       <if test="adoptNum != null">
         adopt_num,
       </if>
-      <if test="reserve1 != null">
-        reserve1,
+      <if test="isDeleted != null">
+        is_deleted,
       </if>
       <if test="reserve2 != null">
         reserve2,
@@ -91,8 +97,8 @@
       <if test="adoptNum != null">
         #{adoptNum,jdbcType=INTEGER},
       </if>
-      <if test="reserve1 != null">
-        #{reserve1,jdbcType=VARCHAR},
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         #{reserve2,jdbcType=VARCHAR},
@@ -120,8 +126,8 @@
       <if test="adoptNum != null">
         adopt_num = #{adoptNum,jdbcType=INTEGER},
       </if>
-      <if test="reserve1 != null">
-        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         reserve2 = #{reserve2,jdbcType=VARCHAR},
@@ -137,7 +143,7 @@
       obj_num = #{objNum,jdbcType=SMALLINT},
       subj_num = #{subjNum,jdbcType=SMALLINT},
       adopt_num = #{adoptNum,jdbcType=INTEGER},
-      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=SMALLINT},
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where answer_sheet_id = #{answerSheetId,jdbcType=INTEGER}
   </update>
