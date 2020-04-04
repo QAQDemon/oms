@@ -22,6 +22,13 @@
     answer_id, answersheet_id, administrator_id, subject_id, answer_name, establish_time, 
     start_time, exam_time, obj_num, subj_num, is_assign, is_deleted, reserve2
   </sql>
+
+  <!--f1-->
+  <select id="selectBySubjectId" resultType="Answer"  parameterType="java.lang.Integer">
+    select * from answer
+    where is_deleted!=1 and subject_id=#{subjectId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
