@@ -8,7 +8,6 @@ import com.neu.edu.oms.utils.PaperXMLReader;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileWriter;

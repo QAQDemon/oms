@@ -25,11 +25,11 @@ public class Answer {
 
     private Byte isAssign;
 
-    private String reserve1;
+    private Short isDeleted;
 
     private String reserve2;
 
-    public Answer(Integer answerId, Integer answersheetId, Integer administratorId, Integer subjectId, String answerName, Date establishTime, Date startTime, Short examTime, Short objNum, Short subjNum, Byte isAssign, String reserve1, String reserve2) {
+    public Answer(Integer answerId, Integer answersheetId, Integer administratorId, Integer subjectId, String answerName, Date establishTime, Date startTime, Short examTime, Short objNum, Short subjNum, Byte isAssign, Short isDeleted, String reserve2) {
         this.answerId = answerId;
         this.answersheetId = answersheetId;
         this.administratorId = administratorId;
@@ -41,7 +41,7 @@ public class Answer {
         this.objNum = objNum;
         this.subjNum = subjNum;
         this.isAssign = isAssign;
-        this.reserve1 = reserve1;
+        this.isDeleted = isDeleted;
         this.reserve2 = reserve2;
     }
 
@@ -137,12 +137,12 @@ public class Answer {
         this.isAssign = isAssign;
     }
 
-    public String getReserve1() {
-        return reserve1;
+    public Short getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setReserve1(String reserve1) {
-        this.reserve1 = reserve1 == null ? null : reserve1.trim();
+    public void setIsDeleted(Short isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getReserve2() {

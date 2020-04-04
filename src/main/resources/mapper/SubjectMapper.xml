@@ -13,6 +13,12 @@
   <sql id="Base_Column_List">
     subject_id, subject_name, college, reserve1, reserve2
   </sql>
+
+  <!--f1-->
+  <select id="selectAll" resultType="Subject">
+    select * from subject
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

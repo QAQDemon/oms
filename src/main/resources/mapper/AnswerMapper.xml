@@ -14,13 +14,13 @@
       <arg column="obj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="subj_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="is_assign" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_deleted" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     answer_id, answersheet_id, administrator_id, subject_id, answer_name, establish_time, 
-    start_time, exam_time, obj_num, subj_num, is_assign, reserve1, reserve2
+    start_time, exam_time, obj_num, subj_num, is_assign, is_deleted, reserve2
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,12 +36,12 @@
     insert into answer (answer_id, answersheet_id, administrator_id, 
       subject_id, answer_name, establish_time, 
       start_time, exam_time, obj_num, 
-      subj_num, is_assign, reserve1, 
+      subj_num, is_assign, is_deleted, 
       reserve2)
     values (#{answerId,jdbcType=INTEGER}, #{answersheetId,jdbcType=INTEGER}, #{administratorId,jdbcType=INTEGER}, 
       #{subjectId,jdbcType=INTEGER}, #{answerName,jdbcType=VARCHAR}, #{establishTime,jdbcType=TIMESTAMP}, 
       #{startTime,jdbcType=TIMESTAMP}, #{examTime,jdbcType=SMALLINT}, #{objNum,jdbcType=SMALLINT}, 
-      #{subjNum,jdbcType=SMALLINT}, #{isAssign,jdbcType=TINYINT}, #{reserve1,jdbcType=VARCHAR}, 
+      #{subjNum,jdbcType=SMALLINT}, #{isAssign,jdbcType=TINYINT}, #{isDeleted,jdbcType=SMALLINT}, 
       #{reserve2,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.Answer">
@@ -80,8 +80,8 @@
       <if test="isAssign != null">
         is_assign,
       </if>
-      <if test="reserve1 != null">
-        reserve1,
+      <if test="isDeleted != null">
+        is_deleted,
       </if>
       <if test="reserve2 != null">
         reserve2,
@@ -121,8 +121,8 @@
       <if test="isAssign != null">
         #{isAssign,jdbcType=TINYINT},
       </if>
-      <if test="reserve1 != null">
-        #{reserve1,jdbcType=VARCHAR},
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         #{reserve2,jdbcType=VARCHAR},
@@ -162,8 +162,8 @@
       <if test="isAssign != null">
         is_assign = #{isAssign,jdbcType=TINYINT},
       </if>
-      <if test="reserve1 != null">
-        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         reserve2 = #{reserve2,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
       obj_num = #{objNum,jdbcType=SMALLINT},
       subj_num = #{subjNum,jdbcType=SMALLINT},
       is_assign = #{isAssign,jdbcType=TINYINT},
-      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=SMALLINT},
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>

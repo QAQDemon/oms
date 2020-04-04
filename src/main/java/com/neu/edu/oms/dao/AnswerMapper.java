@@ -1,9 +1,7 @@
 package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.Answer;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface AnswerMapper {
     int deleteByPrimaryKey(Integer answerId);
 

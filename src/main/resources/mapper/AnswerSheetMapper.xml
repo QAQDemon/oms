@@ -19,6 +19,7 @@
     adopt_num, is_deleted, reserve2
   </sql>
 
+  <!--f1-->
   <select id="selectExceptDeleted" resultType="AnswerSheet">
     select * from answer_sheet
     where is_deleted!=1
