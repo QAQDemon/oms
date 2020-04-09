@@ -128,4 +128,11 @@
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
 
+<!--选取出所有学生-->
+  <select id="getAllStudent" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+  </select>
+
 </mapper>

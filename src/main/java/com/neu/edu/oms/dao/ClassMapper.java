@@ -3,6 +3,8 @@ package com.neu.edu.oms.dao;
 import com.neu.edu.oms.entity.Class;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ClassMapper {
     int deleteByPrimaryKey(Integer classId);
@@ -16,4 +18,6 @@ public interface ClassMapper {
     int updateByPrimaryKeySelective(Class record);
 
     int updateByPrimaryKey(Class record);
+
+    List<Class> getClassListByTeacerId(Integer teacherId);
 }

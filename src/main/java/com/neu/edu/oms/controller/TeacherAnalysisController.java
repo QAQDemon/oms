@@ -11,9 +11,15 @@ public class TeacherAnalysisController {
     @Autowired
     DataInsertService dataInsertService;
 
-    @RequestMapping("/insert")
-    public String insert(){
-        dataInsertService.StudentInsert(50);
+    @RequestMapping("/insertstudent")
+    public String insertstudent(){
+        dataInsertService.StudentInsert(26);
+        return "Teacher";
+    }
+
+    @RequestMapping("/insertpaperscan")
+    public String insertinsertpaperscan(){
+        dataInsertService.PaperScanInsert();
         return "Teacher";
     }
 }

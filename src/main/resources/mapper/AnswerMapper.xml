@@ -187,4 +187,11 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+
+    <!--选取所有答案-->
+    <select id="getAllAnswer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from answer
+    </select>
 </mapper>

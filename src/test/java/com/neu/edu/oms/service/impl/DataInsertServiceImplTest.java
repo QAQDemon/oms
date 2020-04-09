@@ -8,18 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 class DataInsertServiceImplTest {
 
 
-    @Test
-    void createIdList() {
-        new DataInsertServiceImpl().CreateIdList(100);
-    }
-
-    @Test
-    void createNameList() {
-        new DataInsertServiceImpl().CreateNameList(10);
-    }
-
-    @Test
-    void studentInsert() {
-        new DataInsertServiceImpl().StudentInsert(50);
-    }
+//    @Test
+//    void createIdList() {
+//        new DataInsertServiceImpl().CreateIdList(100,1);
+//    }
+//
+//    @Test
+//    void createNameList() {
+//        new DataInsertServiceImpl().CreateNameList(10);
+//    }
+//
+//    @Test
+//    void studentInsert() {
+//        new DataInsertServiceImpl().StudentInsert(50);
+//    }
 }

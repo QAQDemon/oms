@@ -9,4 +9,5 @@ package com.neu.edu.oms.service;
 public interface DataInsertService {
 //    插入学生数据
     int StudentInsert(int num);
+    int PaperScanInsert();
 }

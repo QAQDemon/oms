@@ -1,6 +1,10 @@
 package com.neu.edu.oms.service.impl;
 
+import com.neu.edu.oms.dao.AnswerMapper;
+import com.neu.edu.oms.dao.PaperScanMapper;
 import com.neu.edu.oms.dao.StudentMapper;
+import com.neu.edu.oms.entity.Answer;
+import com.neu.edu.oms.entity.PaperScan;
 import com.neu.edu.oms.entity.Student;
 import com.neu.edu.oms.service.DataInsertService;
 import com.neu.edu.oms.utils.RandomValueUtil;
@@ -8,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -20,12 +25,27 @@ public class DataInsertServiceImpl implements DataInsertService {
     @Resource
     StudentMapper studentMapper;
 
+    @Resource
+    AnswerMapper answerMapper;
+
+    @Resource
+    PaperScanMapper paperScanMapper;
+
+
     @Override
     public int StudentInsert(int num) {
         List<Student> students = CreateStudentList(num);
-        for(int i=0; i<num; i++){
-            System.out.println(students.get(i).getStudentId()+"----"+students.get(i).getStudentName());
-            studentMapper.insert(students.get(i));
+        for(Student student:students){
+            studentMapper.insert(student);
+        }
+        return 1;
+    }
+
+    @Override
+    public int PaperScanInsert(){
+        List<PaperScan> paperScans = CreatePaperScanList();
+        for(PaperScan paperScan:paperScans){
+            paperScanMapper.insert(paperScan);
         }
         return 1;
     }
@@ -40,14 +60,14 @@ public class DataInsertServiceImpl implements DataInsertService {
      **/
     private List<Student> CreateStudentList(int num){
         List<Student> students= new ArrayList<Student>(num);
-        List<Integer> idlist = CreateIdList(num);
+        List<Integer> idlist = CreateIdList(num,1);
         List<String> namelist = CreateNameList(num);
         List<String> phonelist = CreatePhoneList(num);
         List<String> emaillist = CreateEmailList(num);
         for(int i=0; i<num; i++){
             Student student = new Student();
             student.setStudentId(idlist.get(i));
-            student.setClassId((int)(Math.random()*3+1));
+            student.setClassId((int)(Math.random()+4));
             student.setStudentName(namelist.get(i));
             student.setPhonenum(phonelist.get(i));
             student.setEmail(emaillist.get(i));
@@ -65,24 +85,42 @@ public class DataInsertServiceImpl implements DataInsertService {
      * @Return java.util.List<java.lang.Integer>
      * @Since version-1.0
      **/
-    public List<Integer> CreateIdList(int num){
-        List<Integer> idlist = new ArrayList<Integer>(num);
-//        Random random = new Random(1);
-//        for(int i=0; i<num; i++){
-//            int id = random.nextInt(10000)+20160000;
-//            System.out.println(id);
-//            idlist.add(id);
-//        }
-        for(int i=0; i<num; i++){
-            int id = (int)(Math.random()*10000+20170000);
-            System.out.println(id);
-            idlist.add(id);
+    private List<Integer> CreateIdList(int num, int flag){
+        List<Integer> idlist = new ArrayList<Integer>();
+        if (flag == 1){
+            idlist = CreateIdByRandom(num);
+            return idlist;
+        }else if (flag == 2){
+            idlist = CreateIdBynextInt(num);
+            return idlist;
+        }else {
+            return null;
         }
+    }
+
+    private List<Integer> CreateIdByRandom(int num){
+        HashSet<Integer> idset = new HashSet(num);
+        List<Integer> idlist = new ArrayList<Integer>(num);
+        while(idset.size() < num){
+            idset.add((int)(Math.random()*10000+20160000));
+        }
+        idlist.addAll(idset);
+        return idlist;
+    }
+
+    private List<Integer> CreateIdBynextInt(int num){
+        List<Integer> idlist = new ArrayList(num);
+        HashSet<Integer> idset = new HashSet(num);
+        Random random = new Random(1);
+        while(idset.size() < num){
+            idset.add(random.nextInt(10000)+20160000);
+        }
+        idlist.addAll(idset);
         return idlist;
     }
 
 
-    public List<String> CreateNameList(int num){
+    private List<String> CreateNameList(int num){
         List<String> namelist = new ArrayList<String>(num);
         for(int i=0; i<num; i++){
             namelist.add(random.getChineseName());
@@ -91,7 +129,7 @@ public class DataInsertServiceImpl implements DataInsertService {
     }
 
 
-    public List<String> CreatePhoneList(int num){
+    private List<String> CreatePhoneList(int num){
         List<String> phonelist = new ArrayList<String>(num);
         for(int i=0; i<num; i++){
             phonelist.add(random.getTelephone());
@@ -99,7 +137,7 @@ public class DataInsertServiceImpl implements DataInsertService {
         return phonelist;
     }
 
-    public List<String> CreateEmailList(int num){
+    private List<String> CreateEmailList(int num){
         List<String> emaillist = new ArrayList<String>(num);
         for(int i=0; i<num; i++){
             emaillist.add(random.getEmail(13,20));
@@ -107,10 +145,22 @@ public class DataInsertServiceImpl implements DataInsertService {
         return emaillist;
     }
 
-//    private List<Integer> CreateClassId(int num){
-//
-//        return null;
-//    }
+
+
+    //创建扫描试卷
+    private List<PaperScan> CreatePaperScanList(){
+        List<Student> students = studentMapper.getAllStudent();
+        List<Answer> answers = answerMapper.getAllAnswer();
+        List<PaperScan> paperScans = new ArrayList<>();
+        for(Student student:students){
+            for(Answer answer:answers){
+                PaperScan paperScan = new PaperScan(null, student.getStudentId(), answer.getAnswerId(), answer.getAnswerName(),
+                        null, null, answer.getSubjectId(), null, null, (byte) 1,(byte) 1,null,null,null,null,null,null,null,null );
+                paperScans.add(paperScan);
+            }
+        }
+        return paperScans;
+    }
 
     public static void main(String[] args){
         new DataInsertServiceImpl().StudentInsert(100);

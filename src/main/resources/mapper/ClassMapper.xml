@@ -127,4 +127,24 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
+<!--创建一个映射map-->
+    <resultMap id="ResultMap1" type="com.neu.edu.oms.entity.Class">
+        <id column="class_id" property="classId" jdbcType="INTEGER" />
+        <result column="class_year" property="classYear" />
+        <result column="class_num" property="classNum" />
+        <result column="class_name" property="className" />
+        <result column="student_num" property="studentNUm" />
+        <result column="college" property="college" />
+        <result column="reserve1" property="reserve1" />
+        <result column="reserve2" property="reserve2" />
+        <result column="teach_year" property="teachYear" />
+        <result column="subject_id" property="subjectId" />
+    </resultMap>
+<!--根据教师id选取其教授的班级-->
+    <select id="getClassListByTeacerId" parameterType="java.lang.Integer" resultMap="ResultMap1">
+        select c.*, t.teach_year, t.subject_id
+        from class as c join teacher_class as t on c.class_id = t.class_id
+        where t.teacher_id = #{teacherId,jdbcType=INTEGER}
+        order by t.teach_year desc , t.semester desc
+    </select>
 </mapper>
