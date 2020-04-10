@@ -120,11 +120,11 @@ public class Class {
         this.teachYear = teachYear;
     }
 
-    public Integer getTeachSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setTeachSubjectId(Integer teachSubjectId) {
+    public void setSubjectId(Integer teachSubjectId) {
         this.subjectId = teachSubjectId;
     }
 }

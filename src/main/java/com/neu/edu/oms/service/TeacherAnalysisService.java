@@ -1,5 +1,6 @@
 package com.neu.edu.oms.service;
 
+import com.neu.edu.oms.entity.Class;
 import java.util.List;
 
 public interface TeacherAnalysisService {

@@ -19,4 +19,6 @@ public interface AnswerMapper {
     int updateByPrimaryKey(Answer record);
     //选取所有的答案
     List<Answer> getAllAnswer();
+//    根据answerId列表选取answer列表
+    List<Answer> getAnswerListByanswerIdList(List<Integer> answerIdList);
 }

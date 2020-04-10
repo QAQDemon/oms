@@ -133,7 +133,7 @@
         <result column="class_year" property="classYear" />
         <result column="class_num" property="classNum" />
         <result column="class_name" property="className" />
-        <result column="student_num" property="studentNUm" />
+        <result column="student_num" property="studentNum" />
         <result column="college" property="college" />
         <result column="reserve1" property="reserve1" />
         <result column="reserve2" property="reserve2" />

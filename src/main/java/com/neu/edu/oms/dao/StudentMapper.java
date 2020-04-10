@@ -20,4 +20,6 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
     //选取出所有学生
     List<Student> getAllStudent();
+    //根据班级id选取所有的学生id列表
+    List<Integer> getStudentIdListByclassId(Integer classId);
 }
