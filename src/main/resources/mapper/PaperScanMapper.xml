@@ -265,4 +265,16 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where paper_scan_id = #{paperScanId,jdbcType=INTEGER}
   </update>
+<!--通过学生id列表和科目选取其考试的答案id列表-->
+    <!--此处是否添加排序后面再说-->
+    <select id="getanswerIdListBystudentIdAndsubjectId" resultType="java.lang.Integer">
+        select distinct answer_id
+        from paper_scan
+        where student_id in
+        <foreach collection="studentIdList" item="studentId" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+        and subject_id = #{subjectId}
+    </select>
+
 </mapper>

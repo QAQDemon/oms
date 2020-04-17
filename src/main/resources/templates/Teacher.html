@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css" th:href="@{/static/bootstrap/css/bootstrap.css}" media="all"/>
+	<link rel="stylesheet" href="../static/css/teacher.css" th:href="@{/static/css/teacher.css}" media="all">
+	<script src="../static/js/jquery-3.3.1.min.js" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+	<script src="../static/bootstrap/js/bootstrap.js" th:src="@{/static/bootstrap/js/bootstrap.js}"></script>
+</head>
+<body>
+	<div id="all" class="all">
+		<div class="header" id="header">
+			class是header
+		</div>
+		<div class="funchoose" id="funchoose">
+			funchoose
+		</div>
+		<div class="main" id="main">
+			<div class="mainleft" id="mainleft">
+				<div class="choose">
+					<div class="yearchose " id="yearchose">
+						<select class="form-control">
+						  <option value="">待选值</option>
+						  <option value="">待选值</option>
+						  <option value="">待选值</option>
+						  <option value="">待选值</option>
+						  <option value="">待选值</option>
+						</select>
+					</div>
+					<div class="search">
+						<div class="input-group ">
+						      <input type="text" class="form-control" placeholder="输入相关信息">
+						      <span class="input-group-btn">
+						        <button class="btn btn-primary" type="button" >
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button>
+						      </span>
+						</div>
+					</div>
+				</div>
+				<div class="classall" id="classall">
+					<div class="dropdown classitem">
+						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Dropdown
+						<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li class="active"><a href="javascript:void(0)">Action</a></li>
+							<li><a href="javascript:void(0)">Another action</a></li>
+							<li><a href="javascript:void(0)">Something else here</a></li>
+						</ul>
+					</div>
+					<div class="dropdown classitem">
+						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Dropdown
+						<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li class="active"><a href="javascript:void(0)">Action</a></li>
+							<li><a href="javascript:void(0)">Another action</a></li>
+							<li><a href="javascript:void(0)">Something else here</a></li>
+						</ul>
+					</div>
+					<div class="dropdown classitem">
+						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Dropdown
+						<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li class="active"><a href="javascript:void(0)">Action</a></li>
+							<li><a href="javascript:void(0)">Another action</a></li>
+							<li><a href="javascript:void(0)">Something else here</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="leftfooter" id="leftfooter">
+					<div class="slide" id="slide">
+						<button type="button" class="btn btn-info slideright">
+							<span class="glyphicon glyphicon-step-forward"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="mainright" id="mainright">
+				<div class="maintitle" id="maintitle">
+					mainright中的maintitle
+				</div>
+				<div class="mainbody" id="mainbody">
+					<div class="bodyleft" id="bodyleft">
+						<div class="mainheader tableheader" id="tableheader">
+							mainbody中的bodyleft中的mainheader，tableheader
+						</div>
+						<div class="maincenter tablecenter" id="tablecenter">
+							<div class="tablediv" id="tablediv">
+								<div class="tablesearch" id="tablesearch">
+									<div class="input-group ">
+									      <input type="text" class="form-control" placeholder="输入学号或姓名">
+									      <span class="input-group-btn">
+									        <button class="btn btn-primary" type="button" style="width: 60px;">
+												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+											</button>
+									      </span>
+									</div>
+								</div>
+								<div class="maintable" id="maintabe">
+									<table class="score">
+										<caption>成绩表格</caption>
+										<thead class="scorehead">
+											<tr>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+												<th>表头</th>
+											</tr>
+										</thead>
+										<tbody class="scorebody">
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+											<tr>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+												<td>表格项</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="mainfooter tablefooter" id="tablefooter">
+							<div class="slide" id="slide">
+								<button type="button" class="btn btn-info slideleft">
+									<span class="glyphicon glyphicon-step-backward"></span>
+								</button>
+								<button type="button" class="btn btn-info slideright">
+									<span class="glyphicon glyphicon-step-forward"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="bodycenter" id="bodycenter">
+						<div class="mainheader chartheader" id="chartheader">
+							mainbody中的bodycenter中的mainheader，chartheader
+						</div>
+						<div class="maincenter chartcenter" id="chartcenter" style="overflow: auto;">
+							<div style="width: 700px; background-color: red;height: 100px;"></div>
+						</div>
+						<div class="mainfooter chartfooter" id="chartfooter">
+							<div class="slide" id="slide">
+								<button type="button" class="btn btn-info slideleft">
+									<span class="glyphicon glyphicon-step-backward"></span>
+								</button>
+								<button type="button" class="btn btn-info slideright">
+									<span class="glyphicon glyphicon-step-forward"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="bodyright" id="bodyright">
+						<div class="mainheader describeheader" id="describeheader">
+							mainbody中的bodyright中的mainheader，describeheader
+						</div>
+						<div class="maincenter describecenter" id="describecenter">
+							
+						</div>
+						<div class="mainfooter describefooter" id="describefooter">
+							<div class="slide" id="slide">
+								<button type="button" class="btn btn-info slideleft">
+									<span class="glyphicon glyphicon-step-backward"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

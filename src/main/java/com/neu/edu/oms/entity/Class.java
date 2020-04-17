@@ -1,5 +1,7 @@
 package com.neu.edu.oms.entity;
 
+import java.util.List;
+
 public class Class {
     private Integer classId;
 
@@ -16,6 +18,12 @@ public class Class {
     private String reserve1;
 
     private String reserve2;
+
+    private Integer teachYear;
+
+    private Integer subjectId;
+
+    private List<Answer> answers;
 
     public Class(Integer classId, Short classYear, Byte classNum, String className, Short studentNum, String college, String reserve1, String reserve2) {
         this.classId = classId;
@@ -94,5 +102,29 @@ public class Class {
 
     public void setReserve2(String reserve2) {
         this.reserve2 = reserve2 == null ? null : reserve2.trim();
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Integer getTeachYear() {
+        return teachYear;
+    }
+
+    public void setTeachYear(Integer teachYear) {
+        this.teachYear = teachYear;
+    }
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer teachSubjectId) {
+        this.subjectId = teachSubjectId;
     }
 }

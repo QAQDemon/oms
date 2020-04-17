@@ -194,4 +194,21 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+
+    <!--选取所有答案-->
+    <select id="getAllAnswer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from answer
+    </select>
+<!--根据answerId列表选取answer列表-->
+    <!--后期在看是否添加排序-->
+    <select id="getAnswerListByanswerIdList" resultMap="BaseResultMap">
+        select *
+        from answer
+        where answer_id in
+        <foreach collection="list" item="answerId" open="(" separator="," close=")">
+            #{answerId}
+        </foreach>
+    </select>
 </mapper>
