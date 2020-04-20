@@ -9,7 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 public class RectifyUtils {
     private Mat src;
     private RotatedRect rect;

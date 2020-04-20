@@ -105,4 +105,12 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where point_id = #{pointId,jdbcType=INTEGER}
   </update>
+
+
+  <!--f1-->
+  <select id="selectBySubjectId" resultType="Point"  parameterType="java.lang.Integer">
+    select * from point
+    where subject_id=#{subjectId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

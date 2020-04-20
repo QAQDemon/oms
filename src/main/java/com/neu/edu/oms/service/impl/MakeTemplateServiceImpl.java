@@ -4,6 +4,8 @@ import com.neu.edu.oms.dao.AnswerSheetMapper;
 import com.neu.edu.oms.entity.AnswerSheet;
 import com.neu.edu.oms.service.MakeTemplateService;
 import com.neu.edu.oms.utils.Base64Util;
+import com.neu.edu.oms.utils.FileUtil;
+import com.neu.edu.oms.utils.JsonUtils;
 import com.neu.edu.oms.utils.PaperXMLReader;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
@@ -15,41 +17,29 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 @Service
 public class MakeTemplateServiceImpl implements MakeTemplateService {
 
     @Resource
     AnswerSheetMapper answerSheetMapper;
 
-    /*
-     * @Description 保存文件到本地
-     * @Param [excelFile，path保存路径包含文件名D://test.xlsx]
-     * @return java.lang.Boolean true成功 false失败
-     **/
-    public Boolean saveExcelFile(MultipartFile excelFile,String path){
-        if (excelFile.isEmpty()) {
-            return false;
-        }
-        File dest = new File(path);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
-        try {
-            excelFile.transferTo(dest); // 保存文件
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    private final static String PAPER_TEMPLATE_PATH="src/main/resources/paperTemplate.xml";
+    private final static String EXCEL_FILE_PATH="C:\\Users\\demon\\Desktop\\ResourceBackup\\excel\\";
+    private final static String EXCEL_SUFFIX=".xlsx";
 
     /*
      * @Description 根据路径获得xml文件的内容并加密
      * @Param [path src/main/resources/paperTemplate.xml]
      * @return java.lang.String
      **/
-    public String getXMLEncode(String path)throws DocumentException {
-        return Base64Util.encodeToString(new PaperXMLReader(path).readAllAsString());
+    @Override
+    public String getXMLEncode()throws DocumentException {
+        return Base64Util.encodeToString(new PaperXMLReader(PAPER_TEMPLATE_PATH).readAllAsString());
     }
 
     /*
@@ -57,11 +47,12 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
      * @Param [path, content加密的xml内容]
      * @return java.lang.Boolean
      **/
-    public Boolean saveXML(String path,String content){
+    @Override
+    public Boolean saveXML(String content){
         content = Base64Util.decodeToString(content);//解密
         FileWriter writer;
         try {
-            writer = new FileWriter(path);
+            writer = new FileWriter(PAPER_TEMPLATE_PATH);
             writer.write("");//清空原文件内容
             writer.write(content);
             writer.flush();
@@ -73,13 +64,21 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
     }
 
     /*
-     * @Description 插入新的答题卡模板并返回主键id
-     * @Param [answerSheet]
-     * @return int 非0：主键id，0：失败
+     * @Description 插入新的答题卡模板,并保存
+     * @Param [answerSheet, excelFiles]
+     * @return java.lang.Boolean
      **/
-    public int setNewAnswerSheet(AnswerSheet answerSheet) {
+    @Override
+    public Boolean setNewAnswerSheetAndSaveExcelFiles(String answerSheetJson,MultipartFile[] excelFiles) {
+        AnswerSheet answerSheet=JsonUtils.parseToAnswerSheet(answerSheetJson);
         answerSheet.setEstablishTime(new Date());
-        return (1==answerSheetMapper.insertSelective(answerSheet))?answerSheet.getAnswerSheetId():0;//1：成功，返回主键  0：失败，返回0
+        int answerSheetId=answerSheetMapper.insertSelective(answerSheet);
+        if(0==answerSheetId)//插入失败
+            return false;
+        //插入成功，保存文件到本地
+        Boolean b1= FileUtil.saveFile(excelFiles[0],EXCEL_FILE_PATH+answerSheetId+"_A"+EXCEL_SUFFIX);//地址 D://1_A.xlsx
+        Boolean b2=FileUtil.saveFile(excelFiles[1],EXCEL_FILE_PATH+answerSheetId+"_B"+EXCEL_SUFFIX);
+        return b1 && b2;//全成功才返回true
     }
 
     /*
@@ -87,7 +86,8 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
      * @Param [answerSheetId,directory excel文件目录]
      * @return java.lang.Boolean
      **/
-    public Boolean deleteAnswerSheet(int answerSheetId,String directory){
+    @Override
+    public Boolean deleteAnswerSheet(int answerSheetId){
         AnswerSheet answerSheet=answerSheetMapper.selectByPrimaryKey(answerSheetId);
         if(0!=answerSheet.getAdoptNum())//使用过则不能删除
             return false;
@@ -97,8 +97,8 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
         answerSheet.setIsDeleted((short)1);
         answerSheetMapper.updateByPrimaryKeySelective(answerSheet);
         //删除文件
-        new File(directory+answerSheetId+"_A.xlsx").delete();
-        new File(directory+answerSheetId+"_B.xlsx").delete();
+        new File(EXCEL_FILE_PATH+answerSheetId+"_A"+EXCEL_SUFFIX).delete();
+        new File(EXCEL_FILE_PATH+answerSheetId+"_B"+EXCEL_SUFFIX).delete();
         return true;
     }
 
@@ -107,7 +107,18 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
      * @Param []
      * @return java.util.List<com.neu.edu.oms.entity.AnswerSheet>
      **/
+    @Override
     public List<AnswerSheet> getAnswerSheetList(){
         return answerSheetMapper.selectExceptDeleted();
+    }
+
+    /*
+     * @Description 下载excel文件，可能为null
+     * @Param [excelFileNamePrefix]
+     * @return byte[]
+     **/
+    @Override
+    public byte[] downloadExcelByName(String excelFileNamePrefix){
+        return FileUtil.getFileStream(EXCEL_FILE_PATH+excelFileNamePrefix+EXCEL_SUFFIX);
     }
 }

@@ -7,10 +7,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 @Api(tags={"试卷制作"})
 @RestController
 public class MakePaperController {
@@ -23,7 +27,7 @@ public class MakePaperController {
      * @Param []
      * @return java.util.List<com.neu.edu.oms.entity.Subject>
      **/
-    @ApiOperation(value = "显示科目", notes = "")
+    @ApiOperation(value = "显示科目", notes = " ")
     @RequestMapping(value={"/makePaper/getSubject"},method = RequestMethod.POST)
     public List<Subject> getSubject(){
         return makePaperService.getSubjectList();
@@ -34,10 +38,10 @@ public class MakePaperController {
      * @Param [subjectId]
      * @return java.util.List<com.neu.edu.oms.entity.Answer>
      **/
-    @ApiOperation(value = "显示试卷", notes = "")
-    @RequestMapping(value={"/makePaper/getAnswer"},method = RequestMethod.POST)
-    public List<Answer> getAnswer(@ApiParam(required = true,name="subjectId",value="1")@RequestParam(value = "subjectId") String subjectId){
-        return makePaperService.getAnswerListBySubjectId(Integer.parseInt(subjectId));
+    @ApiOperation(value = "显示试卷", notes = " ")
+    @RequestMapping(value={"/makePaper/getAnswer/{subjectId}"},method = RequestMethod.POST)
+    public List<Answer> getAnswer(@ApiParam(required = true, name = "subjectId", value = "1")@PathVariable int subjectId){
+        return makePaperService.getAnswerListBySubjectId(subjectId);
     }
 
     /*
@@ -45,7 +49,7 @@ public class MakePaperController {
      * @Param [answer]
      * @return java.lang.String
      **/
-    @ApiOperation(value = "修改试卷信息", notes = "")
+    @ApiOperation(value = "修改试卷信息", notes = " ")
     @RequestMapping(value={"/makePaper/updateAnswer"},method = RequestMethod.POST)
     public String updateAnswer(@ApiParam(required = true,name="answer",value="{ \"answerId\": 1, \"answersheetId\": 1, \"administratorId\": 1, \"subjectId\": 1, \"answerName\": \"2020告书\", \"establishTime\": 1585999953000, \"startTime\": 1585999957000, \"examTime\": 120, \"objNum\": 30, \"subjNum\": 5, \"isAssign\": 0, \"isDeleted\": 0, \"reserve2\": null }")
                                    @RequestBody Answer answer){
@@ -58,10 +62,10 @@ public class MakePaperController {
      * @Param [answerId]
      * @return java.lang.String
      **/
-    @ApiOperation(value = "删除试卷", notes = "")
-    @RequestMapping(value={"/makePaper/deleteAnswer"},method = RequestMethod.POST)
-    public String deleteAnswer(@ApiParam(required = true,name="answerId",value="1") @RequestParam(value = "answerId") String answerId){
-        makePaperService.deleteAnswer(Integer.parseInt(answerId));
+    @ApiOperation(value = "删除试卷", notes = " ")
+    @RequestMapping(value={"/makePaper/deleteAnswer/{answerId}"},method = RequestMethod.POST)
+    public String deleteAnswer(@ApiParam(required = true,name="answerId",value="1") @PathVariable int answerId){
+        makePaperService.deleteAnswer(answerId);
         return "1";
     }
 
@@ -70,7 +74,7 @@ public class MakePaperController {
      * @Param [answer]
      * @return java.lang.String
      **/
-    @ApiOperation(value = "插入试卷", notes = "")
+    @ApiOperation(value = "插入试卷", notes = " ")
     @RequestMapping(value={"/makePaper/insertAnswer"},method = RequestMethod.POST)
     public String insertAnswer(@ApiParam(required = true,name="answer",value="{ \"answersheetId\": 1, \"administratorId\": 1, \"subjectId\": 1, \"answerName\": \"2020告书\",  \"startTime\": 1585999957000, \"examTime\": 120, \"objNum\": 30, \"subjNum\": 5}")
                                    @RequestBody Answer answer){

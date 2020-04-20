@@ -2,7 +2,6 @@ package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.Answer;
 import com.neu.edu.oms.entity.PaperScan;
-import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

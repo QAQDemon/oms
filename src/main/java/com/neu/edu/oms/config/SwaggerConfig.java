@@ -13,8 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
  * @Description swagger配置类。在controller类上加注释，进入http://localhost:8080/swagger-ui.html测试。
- * @Param 
- * @return 
+ * @author demon
+ * @version v1.0
  **/
 @Configuration
 @EnableSwagger2

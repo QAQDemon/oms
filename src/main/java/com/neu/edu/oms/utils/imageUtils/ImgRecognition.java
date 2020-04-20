@@ -8,12 +8,17 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.ml.KNearest;
 import org.opencv.ml.Ml;
 import org.opencv.utils.Converters;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 public class ImgRecognition {
+
     private final static String FILE_NAME_PREFIX="C:\\Users\\demon\\Desktop\\oms\\ResourceBackup\\fonts"; //todo 存储字符AB文件，根据服务器修改
 
     /*

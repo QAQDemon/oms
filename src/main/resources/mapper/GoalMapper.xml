@@ -105,4 +105,10 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where goal_id = #{goalId,jdbcType=INTEGER}
   </update>
+
+  <!--f1-->
+  <select id="selectBySubjectId" resultType="Goal"  parameterType="java.lang.Integer">
+    select * from goal
+    where subject_id=#{subjectId,jdbcType=INTEGER}
+  </select>
 </mapper>

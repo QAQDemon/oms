@@ -13,7 +13,11 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 @Service
 public class MakePaperServiceImpl implements MakePaperService {
 
@@ -31,6 +35,7 @@ public class MakePaperServiceImpl implements MakePaperService {
      * @Param []
      * @return java.util.List<com.neu.edu.oms.entity.Subject>
      **/
+    @Override
     public List<Subject> getSubjectList() {
         return subjectMapper.selectAll();
     }
@@ -40,6 +45,7 @@ public class MakePaperServiceImpl implements MakePaperService {
      * @Param [subjectId]
      * @return java.util.List<com.neu.edu.oms.entity.Answer>
      **/
+    @Override
     public List<Answer> getAnswerListBySubjectId(int subjectId){
         return answerMapper.selectBySubjectId(subjectId);
     }
@@ -49,6 +55,7 @@ public class MakePaperServiceImpl implements MakePaperService {
      * @Param [answer]
      * @return java.lang.Boolean true成功
      **/
+    @Override
     public Boolean updateAnswer(Answer answer) {
         return 1==answerMapper.updateByPrimaryKeySelective(answer);
     }
@@ -58,6 +65,7 @@ public class MakePaperServiceImpl implements MakePaperService {
      * @Param [answerId]
      * @return java.lang.Boolean
      **/
+    @Override
     public Boolean deleteAnswer(int answerId) {
         //判断是否扫描过
         List<Answer> list = paperScanMapper.selectByAnswerId(answerId);
@@ -86,6 +94,7 @@ public class MakePaperServiceImpl implements MakePaperService {
      * @Param [answer]
      * @return java.lang.Boolean
      **/
+    @Override
     public Boolean insertAnswer(Answer answer){
         answer.setEstablishTime(new Date());
         if(0==answerMapper.insertSelective(answer)){//插入失败

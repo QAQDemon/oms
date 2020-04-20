@@ -4,6 +4,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 @Configuration
 public class SwaggerWebMvcConfig extends WebMvcConfigurationSupport {
     @Override

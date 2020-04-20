@@ -2,7 +2,6 @@ package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 @Mapper

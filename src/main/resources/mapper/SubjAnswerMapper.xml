@@ -152,4 +152,25 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where subj_answer_id = #{subjAnswerId,jdbcType=INTEGER}
   </update>
+
+
+  <!--f1-->
+  <select id="selectByAnswerId" resultType="SubjAnswer"  parameterType="java.lang.Integer">
+    select * from subj_answer
+    where answer_id=#{answerId,jdbcType=INTEGER}
+  </select>
+  <!--f2 更新主观题答案，如果主键不存在则插入-->
+  <insert id="updateAndInsert" parameterType="SubjAnswer">
+    insert into subj_answer (subj_answer_id,answer_id,point_id,goal_id,question_num,score,point_description,point_photo)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.subjAnswerId,jdbcType=INTEGER}, #{item.answerId,jdbcType=INTEGER},#{item.pointId,jdbcType=INTEGER}, #{item.goalId,jdbcType=INTEGER},#{item.questionNum,jdbcType=SMALLINT},#{item.score,jdbcType=SMALLINT},#{item.pointDescription,jdbcType=VARCHAR},#{item.pointPhoto,jdbcType=VARCHAR})
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    point_id = values(point_id),
+    goal_id = values(goal_id),
+    score = values(score),
+    point_description = values(point_description),
+    point_photo = values(point_photo)
+  </insert>
 </mapper>

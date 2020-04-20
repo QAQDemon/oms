@@ -8,7 +8,11 @@ import org.dom4j.DocumentException;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 
-
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 public class SegmentUtils {
     private int[] startIndexs;
     private Mat src;

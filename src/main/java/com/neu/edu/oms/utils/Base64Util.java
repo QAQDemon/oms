@@ -4,6 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
+/*
  * @Description 对字符串进行加密解密
  **/
 public class Base64Util {

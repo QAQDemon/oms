@@ -4,6 +4,11 @@ import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
+/*
+ * @Description
+ * @author demon
+ * @version v1.0
+ **/
 public class MatUtils {
     private static final int BLACK = 0;
     private static final int WHITE = 255;
