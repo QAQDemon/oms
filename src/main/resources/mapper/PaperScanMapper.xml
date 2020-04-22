@@ -29,13 +29,6 @@
     submit_time, address_prefix, is_assign, is_mark, obj_get, obj_all, subj_get, subj_all, 
     score_get, score, reserve1, reserve2
   </sql>
-
-  <!--f1-->
-  <select id="selectByAnswerId" resultType="PaperScan"  parameterType="java.lang.Integer">
-    select * from paper_scan
-    where answer_id=#{answerId,jdbcType=INTEGER}
-  </select>
-
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -62,7 +55,7 @@
       #{scoreGet,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, 
       #{reserve2,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.PaperScan">
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.PaperScan" useGeneratedKeys = "true" keyProperty = "paperScanId">
     insert into paper_scan
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="paperScanId != null">
@@ -277,4 +270,15 @@
         and subject_id = #{subjectId}
     </select>
 
+  <!--f1 获得所有当前答案的扫描信息-->
+  <select id="selectByAnswerId" resultType="PaperScan"  parameterType="java.lang.Integer">
+    select * from paper_scan
+    where answer_id=#{answerId,jdbcType=INTEGER}
+  </select>
+
+  <!--f2 根据answerId,subjectId,studentId获得主键-->
+  <select id="selectByThreeId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select paper_scan_id from paper_scan
+    where answer_id = #{answerId,jdbcType=INTEGER} and subject_id = #{subjectId,jdbcType=INTEGER} and student_id = #{studentId,jdbcType=INTEGER}
+  </select>
 </mapper>

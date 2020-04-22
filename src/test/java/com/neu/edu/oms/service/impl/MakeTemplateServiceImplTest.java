@@ -26,7 +26,7 @@ class MakeTemplateServiceImplTest {
         AnswerSheet answerSheet=new AnswerSheet();
         answerSheet.setObjNum((short) 5);
         answerSheet.setAdministratorId(1);
-        answerSheetMapper.insertSelective(answerSheet);
+        int n=answerSheetMapper.insertSelective(answerSheet);
         return;
     }
 

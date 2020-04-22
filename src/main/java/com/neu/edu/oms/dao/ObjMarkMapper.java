@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ObjMarkMapper {
+    //根据PaperScanId删除
+    int deleteByPaperScanId(Integer paperScanId);
+
     int deleteByPrimaryKey(Integer objMarkId);
 
     int insert(ObjMark record);

@@ -8,6 +8,9 @@ import org.dom4j.DocumentException;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @Description
  * @author demon
@@ -24,6 +27,8 @@ public class SegmentUtils {
     private double yLength;
     private double x0;
     private double y0;
+
+    private static final double RATE_LIMIT=0.3;
 
     /*
      * @Description 初始化，将试卷图片调整为正，上短下长
@@ -152,10 +157,10 @@ public class SegmentUtils {
 
     /*
      * @Description 分割题目的图片并返回选项结果
-     * @Param [sign 0客观题 1选择题 2判断题]
-     * @return int[组数][题目数][结果1/0]
+     * @Param [sign 0主观题 1选择题 2判断题]
+     * @return String[题目数]
      **/
-    public int[][][] slipAndScanQuestionImg(int sign){
+    public String[] slipAndScanQuestionImg(int sign){
         int[][] coordinates=new int[2][2];
         String name="";
         if (sign == 0) {
@@ -170,7 +175,7 @@ public class SegmentUtils {
         }
         if(coordinates[0][0]==-1)//读取失败
             return null;
-        int[][][] res=null;
+        List<String[]> resList = new ArrayList<>();
         for (int i = 0; i < coordinates.length ; i+=2) {
             //分割
             int[][] temp = new int[2][2];
@@ -197,15 +202,20 @@ public class SegmentUtils {
                     String extend=object.get("extend").getAsString();
                     String choice=object.get("choice").getAsString();
                     //扫描选项
-                    int[][] scanRes=choiceScan("D:/jpg/" + name + (i / 2 + 1) + ".jpg", extend, choice, 0.3);
-                    if (res == null)
-                        res=new int[coordinates.length/2][Integer.parseInt(extend.substring(1,2))+1][Integer.parseInt(choice.substring(1,2))];//假设第一组非特殊个数
-                    //复制数组
-                    for (int m = 0; m < Integer.parseInt(extend.substring(1, 2)) + 1; m++) {
-                        if (Integer.parseInt(choice.substring(1, 2)) >= 0)
-                            System.arraycopy(scanRes[m], 0, res[i / 2][m], 0, Integer.parseInt(choice.substring(1, 2)));
-                    }
+                    resList.add(choiceScan("D:/jpg/" + name + (i / 2 + 1) + ".jpg", extend, choice, RATE_LIMIT));
                 }
+            }
+        }
+        //转换成String[]
+        int count=0;
+        for (String[] strings : resList) {
+            count+=strings.length;
+        }
+        String[] res = new String[count];
+        count=0;
+        for (String[] strings : resList) {
+            for (String s : strings) {
+                res[count++]=s;
             }
         }
         return res;
@@ -214,9 +224,9 @@ public class SegmentUtils {
     /*
      * @Description 扫描获得选择题涂点结果
      * @Param [imgName图片名字, extend扩展d5, choice选项r4, rateLimit黑点率限制]
-     * @return int[][] 1涂 0未涂
+     * @return String[] 1涂 0未涂 ["1000","0100"]
      **/
-    public int[][] choiceScan(String imgName,String extend,String choice,double rateLimit){
+    public String[] choiceScan(String imgName,String extend,String choice,double rateLimit){
         MatUtils matUtils = new MatUtils(imgName);
         matUtils.getMinBorder(0);//消黑边
         int width = matUtils.getWidth();
@@ -224,7 +234,7 @@ public class SegmentUtils {
         int extendNum = Integer.parseInt(extend.substring(1,2));//扩展数
         String extendSign=extend.substring(0,1);//r右 d下
         int choiceNum = Integer.parseInt(choice.substring(1,2));//选项数
-        int[][] res = new int[extendNum+1][choiceNum];
+        String[] res=new String[extendNum+1];
         double aHeight=0, aWidth=0;
         //扫描黑点率
         if(extendSign.equals("d")||extendSign.equals("D")){//向下分布
@@ -235,13 +245,15 @@ public class SegmentUtils {
             aWidth=(double)width/(extendNum+1);
         }
         for (int i = 0; i < extendNum+1; i++) {
+            res[i]="";
             for (int j = 0; j < choiceNum; j++) {
                 double rate;
                 if(extendSign.equals("d")||extendSign.equals("D"))
                     rate=matUtils.getAreaBlackRate(new Point(aWidth*j,aHeight*i),new Point(aWidth*(j+1),aHeight*(i+1)));
                 else rate=matUtils.getAreaBlackRate(new Point(aWidth*i,aHeight*j),new Point(aWidth*(i+1),aHeight*(j+1)));
                 if(rate>rateLimit)
-                    res[i][j]=1;
+                    res[i]+="1";
+                else res[i] += "0";
             }
         }
         return res;

@@ -11,13 +11,13 @@
       <arg column="goal_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="mark_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="is_right" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="question_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     obj_mark_id, paper_sacn_id, score_get, score, point_id, goal_id, mark_time, is_right, 
-    reserve1, reserve2
+    question_num, reserve2
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -32,11 +32,11 @@
   <insert id="insert" parameterType="com.neu.edu.oms.entity.ObjMark">
     insert into obj_mark (obj_mark_id, paper_sacn_id, score_get, 
       score, point_id, goal_id, 
-      mark_time, is_right, reserve1, 
+      mark_time, is_right, question_num, 
       reserve2)
     values (#{objMarkId,jdbcType=INTEGER}, #{paperSacnId,jdbcType=INTEGER}, #{scoreGet,jdbcType=SMALLINT}, 
       #{score,jdbcType=SMALLINT}, #{pointId,jdbcType=INTEGER}, #{goalId,jdbcType=INTEGER}, 
-      #{markTime,jdbcType=TIMESTAMP}, #{isRight,jdbcType=TINYINT}, #{reserve1,jdbcType=VARCHAR}, 
+      #{markTime,jdbcType=TIMESTAMP}, #{isRight,jdbcType=TINYINT}, #{questionNum,jdbcType=SMALLINT}, 
       #{reserve2,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.ObjMark">
@@ -66,8 +66,8 @@
       <if test="isRight != null">
         is_right,
       </if>
-      <if test="reserve1 != null">
-        reserve1,
+      <if test="questionNum != null">
+        question_num,
       </if>
       <if test="reserve2 != null">
         reserve2,
@@ -98,8 +98,8 @@
       <if test="isRight != null">
         #{isRight,jdbcType=TINYINT},
       </if>
-      <if test="reserve1 != null">
-        #{reserve1,jdbcType=VARCHAR},
+      <if test="questionNum != null">
+        #{questionNum,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         #{reserve2,jdbcType=VARCHAR},
@@ -130,8 +130,8 @@
       <if test="isRight != null">
         is_right = #{isRight,jdbcType=TINYINT},
       </if>
-      <if test="reserve1 != null">
-        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      <if test="questionNum != null">
+        question_num = #{questionNum,jdbcType=SMALLINT},
       </if>
       <if test="reserve2 != null">
         reserve2 = #{reserve2,jdbcType=VARCHAR},
@@ -148,8 +148,14 @@
       goal_id = #{goalId,jdbcType=INTEGER},
       mark_time = #{markTime,jdbcType=TIMESTAMP},
       is_right = #{isRight,jdbcType=TINYINT},
-      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      question_num = #{questionNum,jdbcType=SMALLINT},
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where obj_mark_id = #{objMarkId,jdbcType=INTEGER}
   </update>
+
+  <!--f1 根据PaperScanId删除-->
+  <delete id="deleteByPaperScanId" parameterType="java.lang.Integer">
+    delete from obj_mark
+    where paper_sacn_id = #{paperScanId,jdbcType=INTEGER}
+  </delete>
 </mapper>

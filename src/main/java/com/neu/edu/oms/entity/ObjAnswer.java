@@ -13,13 +13,13 @@ public class ObjAnswer {
 
     private Short score;
 
-    private Byte answerNum;
+    private String answerNum;
 
     private String reserve1;
 
     private String reserve2;
 
-    public ObjAnswer(Integer objAnswerId, Integer answerId, Integer pointId, Integer goalId, Short questionNum, Short score, Byte answerNum, String reserve1, String reserve2) {
+    public ObjAnswer(Integer objAnswerId, Integer answerId, Integer pointId, Integer goalId, Short questionNum, Short score, String answerNum, String reserve1, String reserve2) {
         this.objAnswerId = objAnswerId;
         this.answerId = answerId;
         this.pointId = pointId;
@@ -83,12 +83,12 @@ public class ObjAnswer {
         this.score = score;
     }
 
-    public Byte getAnswerNum() {
+    public String getAnswerNum() {
         return answerNum;
     }
 
-    public void setAnswerNum(Byte answerNum) {
-        this.answerNum = answerNum;
+    public void setAnswerNum(String answerNum) {
+        this.answerNum = answerNum == null ? null : answerNum.trim();
     }
 
     public String getReserve1() {

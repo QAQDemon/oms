@@ -19,11 +19,11 @@ public class ObjMark {
 
     private Byte isRight;
 
-    private String reserve1;
+    private Short questionNum;
 
     private String reserve2;
 
-    public ObjMark(Integer objMarkId, Integer paperSacnId, Short scoreGet, Short score, Integer pointId, Integer goalId, Date markTime, Byte isRight, String reserve1, String reserve2) {
+    public ObjMark(Integer objMarkId, Integer paperSacnId, Short scoreGet, Short score, Integer pointId, Integer goalId, Date markTime, Byte isRight, Short questionNum, String reserve2) {
         this.objMarkId = objMarkId;
         this.paperSacnId = paperSacnId;
         this.scoreGet = scoreGet;
@@ -32,7 +32,7 @@ public class ObjMark {
         this.goalId = goalId;
         this.markTime = markTime;
         this.isRight = isRight;
-        this.reserve1 = reserve1;
+        this.questionNum = questionNum;
         this.reserve2 = reserve2;
     }
 
@@ -104,12 +104,12 @@ public class ObjMark {
         this.isRight = isRight;
     }
 
-    public String getReserve1() {
-        return reserve1;
+    public Short getQuestionNum() {
+        return questionNum;
     }
 
-    public void setReserve1(String reserve1) {
-        this.reserve1 = reserve1 == null ? null : reserve1.trim();
+    public void setQuestionNum(Short questionNum) {
+        this.questionNum = questionNum;
     }
 
     public String getReserve2() {

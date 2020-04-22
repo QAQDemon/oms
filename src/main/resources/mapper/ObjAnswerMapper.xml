@@ -9,7 +9,7 @@
       <arg column="goal_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="question_num" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="score" javaType="java.lang.Short" jdbcType="SMALLINT" />
-      <arg column="answer_num" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="answer_num" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
@@ -35,10 +35,10 @@
       )
     values (#{objAnswerId,jdbcType=INTEGER}, #{answerId,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, 
       #{goalId,jdbcType=INTEGER}, #{questionNum,jdbcType=SMALLINT}, #{score,jdbcType=SMALLINT}, 
-      #{answerNum,jdbcType=TINYINT}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
+      #{answerNum,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.ObjAnswer">
+  <insert id="insertSelective" parameterType="com.neu.edu.oms.entity.ObjAnswer"  useGeneratedKeys = "true" keyProperty = "objAnswerId">
     insert into obj_answer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="objAnswerId != null">
@@ -89,7 +89,7 @@
         #{score,jdbcType=SMALLINT},
       </if>
       <if test="answerNum != null">
-        #{answerNum,jdbcType=TINYINT},
+        #{answerNum,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
         score = #{score,jdbcType=SMALLINT},
       </if>
       <if test="answerNum != null">
-        answer_num = #{answerNum,jdbcType=TINYINT},
+        answer_num = #{answerNum,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},
@@ -136,7 +136,7 @@
       goal_id = #{goalId,jdbcType=INTEGER},
       question_num = #{questionNum,jdbcType=SMALLINT},
       score = #{score,jdbcType=SMALLINT},
-      answer_num = #{answerNum,jdbcType=TINYINT},
+      answer_num = #{answerNum,jdbcType=VARCHAR},
       reserve1 = #{reserve1,jdbcType=VARCHAR},
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where obj_answer_id = #{objAnswerId,jdbcType=INTEGER}
@@ -154,7 +154,7 @@
     insert into obj_answer (obj_answer_id,answer_id,point_id,goal_id,question_num,score,answer_num)
     values
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.objAnswerId,jdbcType=INTEGER}, #{item.answerId,jdbcType=INTEGER},#{item.pointId,jdbcType=INTEGER}, #{item.goalId,jdbcType=INTEGER},#{item.questionNum,jdbcType=SMALLINT},#{item.score,jdbcType=SMALLINT},#{item.answerNum,jdbcType=TINYINT})
+      (#{item.objAnswerId,jdbcType=INTEGER}, #{item.answerId,jdbcType=INTEGER},#{item.pointId,jdbcType=INTEGER}, #{item.goalId,jdbcType=INTEGER},#{item.questionNum,jdbcType=SMALLINT},#{item.score,jdbcType=SMALLINT},#{item.answerNum,jdbcType=VARCHAR})
     </foreach>
     ON DUPLICATE KEY UPDATE
     point_id = values(point_id),

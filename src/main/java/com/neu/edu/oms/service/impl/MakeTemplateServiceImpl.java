@@ -72,7 +72,8 @@ public class MakeTemplateServiceImpl implements MakeTemplateService {
     public Boolean setNewAnswerSheetAndSaveExcelFiles(String answerSheetJson,MultipartFile[] excelFiles) {
         AnswerSheet answerSheet=JsonUtils.parseToAnswerSheet(answerSheetJson);
         answerSheet.setEstablishTime(new Date());
-        int answerSheetId=answerSheetMapper.insertSelective(answerSheet);
+        answerSheetMapper.insertSelective(answerSheet);
+        int answerSheetId=answerSheet.getAnswerSheetId();
         if(0==answerSheetId)//插入失败
             return false;
         //插入成功，保存文件到本地

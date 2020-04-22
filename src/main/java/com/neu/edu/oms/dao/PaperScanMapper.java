@@ -11,6 +11,8 @@ import java.util.Map;
 public interface PaperScanMapper {
     //获得所有当前答案的扫描信息
     List<Answer> selectByAnswerId(Integer answerId);
+    //根据answerId,subjectId,studentId获得主键
+    int[] selectByThreeId(Integer answerId,Integer subjectId,Integer studentId);
 
     int deleteByPrimaryKey(Integer paperScanId);
 

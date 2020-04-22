@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.neu.edu.oms.entity.AnswerSheet;
 import com.neu.edu.oms.entity.SubjAnswer;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,5 +44,15 @@ public class JsonUtils {
     public static List<SubjAnswer> parseToSubjAnswerList(String json){
         SubjAnswer[] subjAnswers=new Gson().fromJson(json,SubjAnswer[].class);
         return new ArrayList<>(Arrays.asList(subjAnswers));
+    }
+
+    /*
+     * @Description 将json转换为客观题map类型
+     * @Param [json]
+     * @return java.util.Map<java.lang.String,String[]>
+     **/
+    public static Map<String, String[]> parseToObjMap(String json) {
+        Type type = new TypeToken<Map<String, String[]>>(){}.getType();
+        return new Gson().fromJson(json, type);
     }
 }
