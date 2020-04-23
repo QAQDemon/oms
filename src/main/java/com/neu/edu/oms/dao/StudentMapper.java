@@ -21,4 +21,7 @@ public interface StudentMapper {
     List<Student> getAllStudent();
     //根据班级id选取所有的学生id列表
     List<Integer> getStudentIdListByclassId(Integer classId);
+    //根据班级id选取所有的学生列表
+    List<Student> getStudentListByclassId(Integer classId);
+
 }

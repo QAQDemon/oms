@@ -176,4 +176,11 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where subj_score_id = #{subjScoreId,jdbcType=INTEGER}
   </update>
+
+    <!-- 根据PaperScanId选取主观题分数-->
+    <select id="getSubjScoreListBypaperScanId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from subj_score
+        where paper_scan_id = #{paperScanId,jdbcType=INTEGER}
+    </select>
 </mapper>

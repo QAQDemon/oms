@@ -4,6 +4,7 @@ import com.neu.edu.oms.dao.*;
 import com.neu.edu.oms.entity.*;
 import com.neu.edu.oms.service.DataInsertService;
 import com.neu.edu.oms.utils.RandomValueUtil;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -99,6 +100,39 @@ public class DataInsertServiceImpl implements DataInsertService {
                 objMark.setPointId((int)(Math.random()*6+(subid-1)*6+1));
                 objMark.setQuestionNum((short)(i+1));
                 objMarkMapper.insert(objMark);
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public int SubjMarkInsert(){
+        List<PaperScan> paperScans = paperScanMapper.getAllPaperScan();
+        for (PaperScan paperScan:paperScans){
+            Answer answer = answerMapper.selectByPrimaryKey(paperScan.getAnswerId());
+            int num = answer.getSubjNum();
+            int subid = answer.getSubjectId();
+            int scoreget=0;
+            for(int i=0; i<num; i++){
+                SubjMark subjMark = new SubjMark();
+                subjMark.setPaperScanId(paperScan.getPaperScanId());
+                subjMark.setScore((short)10);
+                subjMark.setQuestionNum((short)(answer.getObjNum()+i+1));
+                subjMark.setGoalId((int)(Math.random()*6+(subid-1)*6+1));
+                subjMark.setPointId((int)(Math.random()*6+(subid-1)*6+1));
+                subjMark.setTeacherId((int)(Math.random()*5+1));
+                int scorerandom = (int)(Math.random()*20);
+                if(scorerandom <10){
+                    scoreget = scorerandom;
+                }else if(scorerandom < 15){
+                    scoreget = scorerandom-5;
+                }else if(scorerandom < 17){
+                    scoreget = 0;
+                }else{
+                    scoreget = 10;
+                }
+                subjMark.setScoreGet((short)scoreget);
+                subjMarkMapper.insert(subjMark);
             }
         }
         return 1;

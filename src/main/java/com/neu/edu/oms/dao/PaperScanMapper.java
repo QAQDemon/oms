@@ -2,6 +2,8 @@ package com.neu.edu.oms.dao;
 
 import com.neu.edu.oms.entity.Answer;
 import com.neu.edu.oms.entity.PaperScan;
+import com.neu.edu.oms.entity.PaperScanFull;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,8 +27,10 @@ public interface PaperScanMapper {
     int updateByPrimaryKeySelective(PaperScan record);
 
     int updateByPrimaryKey(PaperScan record);
-//通过学生id列表和科目选取其考试的答案id列表
+//通过学生id列表和科目选取其考试的答案id列表，  此处最好加一个条件是已经批改完的
     List<Integer> getanswerIdListBystudentIdAndsubjectId(Map<String, Object> studentIdMap);
     //选取出所有的扫描试卷
     List<PaperScan> getAllPaperScan();
+    //通过学生id和试卷id选出相应的扫描试卷,此处填写paperscanfull尝试一下
+    PaperScan getPaperScanBystudentIdAndanswerId(Integer studentId, Integer answerId);
 }

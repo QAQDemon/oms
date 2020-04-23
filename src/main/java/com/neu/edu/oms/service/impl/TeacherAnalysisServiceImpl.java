@@ -38,6 +38,7 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
             List<Integer> studentIdList = studentMapper.getStudentIdListByclassId(class1.getClassId());
             studentIdMap.put("studentIdList", studentIdList);
             studentIdMap.put("subjectId", class1.getSubjectId());
+            //此处调用的方法最好加上一个判断条件是已经批改完的
             List<Integer> answerIdList = paperScanMapper.getanswerIdListBystudentIdAndsubjectId(studentIdMap);
             studentIdMap.clear();
             class1.setAnswers(answerMapper.getAnswerListByanswerIdList(answerIdList));

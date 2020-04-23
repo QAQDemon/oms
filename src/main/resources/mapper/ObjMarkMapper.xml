@@ -158,4 +158,10 @@
     delete from obj_mark
     where paper_sacn_id = #{paperScanId,jdbcType=INTEGER}
   </delete>
+    <!-- 根据PaperScanId选取客观题列表,此表的字段写错了，数据库写错了-->
+  <select id="getObjMarkListBypaperScanId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select *
+      from obj_mark
+      where paper_sacn_id = #{paperScanId,jdbcType=INTEGER}
+  </select>
 </mapper>

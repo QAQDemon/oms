@@ -268,6 +268,7 @@
             #{studentId}
         </foreach>
         and subject_id = #{subjectId}
+        and is_mark = 1
     </select>
 
   <!--f1 获得所有当前答案的扫描信息-->
@@ -277,7 +278,7 @@
   </select>
 
   <!--f2 根据answerId,subjectId,studentId获得主键-->
-  <select id="selectByThreeId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  <select id="selectByThreeId" resultType="java.lang.Integer">
     select paper_scan_id from paper_scan
     where answer_id = #{answerId,jdbcType=INTEGER} and subject_id = #{subjectId,jdbcType=INTEGER} and student_id = #{studentId,jdbcType=INTEGER}
   </select>
@@ -285,5 +286,13 @@
     <select id="getAllPaperScan" resultMap="BaseResultMap">
         select *
         from paper_scan
+    </select>
+    <!--通过学生id和试卷id选出相应的扫描试卷-->
+    <select id="getPaperScanBystudentIdAndanswerId" resultType="BaseResultMap">
+        select *
+        from paper_scan
+        where student_id = #{studentId}
+        and answer_id = #{answerId}
+        and is_mark = 1
     </select>
 </mapper>

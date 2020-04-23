@@ -46,6 +46,13 @@ public class TeacherAnalysisController {
         return "Teacher";
     }
 
+    @RequestMapping("/insertsubj")
+    public String insertsubj(){
+        dataInsertService.SubjMarkInsert();
+        dataInsertService.SubjMarkInsert();
+        return "Teacher";
+    }
+
     @RequestMapping("/test")
     public String test(Model model){
         List<Class> classList =  teacherAnalysisService.getClassAndAnswerByTeacherId(1);

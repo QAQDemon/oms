@@ -187,4 +187,11 @@
       reserve2 = #{reserve2,jdbcType=VARCHAR}
     where subj_mark_id = #{subjMarkId,jdbcType=INTEGER}
   </update>
+
+    <!-- 根据PaperScanId选取主观题列表-->
+    <select id="getSubjMarkListBypaperScanId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from subj_mark
+        where paper_scan_id = #{paperScanId,jdbcType=INTEGER}
+    </select>
 </mapper>

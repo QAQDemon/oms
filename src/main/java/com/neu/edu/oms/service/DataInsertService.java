@@ -15,4 +15,6 @@ public interface DataInsertService {
     int GoalAndPointInsert();
     //插入客观题批改信息
     int ObjMarkInsert();
+    //插入主观题批改信息
+    int SubjMarkInsert();
 }
