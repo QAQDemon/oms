@@ -27,4 +27,6 @@ public interface PaperScanMapper {
     int updateByPrimaryKey(PaperScan record);
 //通过学生id列表和科目选取其考试的答案id列表
     List<Integer> getanswerIdListBystudentIdAndsubjectId(Map<String, Object> studentIdMap);
+    //选取出所有的扫描试卷
+    List<PaperScan> getAllPaperScan();
 }

@@ -5,13 +5,28 @@
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css" th:href="@{/static/bootstrap/css/bootstrap.css}" media="all"/>
 	<link rel="stylesheet" href="../static/css/teacher.css" th:href="@{/static/css/teacher.css}" media="all">
+	<!-- css一定要放在头部，但是相对来说不重要的js文件（和dom元素的加载无关的js）一般
+	 建议放在body标签和html标签之间-->
 	<script src="../static/js/jquery-3.3.1.min.js" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
 	<script src="../static/bootstrap/js/bootstrap.js" th:src="@{/static/bootstrap/js/bootstrap.js}"></script>
+	<script src="../static/js/vue.js" th:src="@{/static/js/vue.js}"></script>
+	<script src="../static/js/jquery-1.8.3.min.js" th:src="@{/static/js/jquery-1.8.3.min.js}"></script>
+
+	<!-- 获取变量的js代码 -->
+	<script th:inline="javascript">
+		var classlist = [[${classes}]];
+		// alert(typeof(classes));
+		console.log(classlist);
+		console.log(typeof(classeslist));
+		// alert(1);
+	</script>
+<!-- 	<script src="../static/js/teacher.js"></script> -->
+<!--    <script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}"></script> -->
 </head>
 <body>
 	<div id="all" class="all">
 		<div class="header" id="header">
-			class是header
+			header
 		</div>
 		<div class="funchoose" id="funchoose">
 			funchoose
@@ -21,7 +36,7 @@
 				<div class="choose">
 					<div class="yearchose " id="yearchose">
 						<select class="form-control">
-						  <option value="">待选值</option>
+						  <option value="">1</option>
 						  <option value="">待选值</option>
 						  <option value="">待选值</option>
 						  <option value="">待选值</option>
@@ -40,13 +55,14 @@
 					</div>
 				</div>
 				<div class="classall" id="classall">
-					<div class="dropdown classitem">
+					<div class="dropdown classitem" v-for="class1 in classes">
 						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						Dropdown
+						{{class1.className}}
 						<span class="caret"></span>
+						<br><span> 哈哈</span>
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li class="active"><a href="javascript:void(0)">Action</a></li>
+							<li class="active" v-for="answer in class1.answers"><a href="javascript:void(0)">{{answer.answerName}}</a></li>
 							<li><a href="javascript:void(0)">Another action</a></li>
 							<li><a href="javascript:void(0)">Something else here</a></li>
 						</ul>
@@ -294,5 +310,14 @@
 			</div>
 		</div>
 	</div>
+	<!-- 即此处，更好 -->
+	<script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}"></script>
 </body>
+<!-- <script src="../static/js/teacher.js"></script> -->
+<!-- <script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}></script> -->
+ <!--此处也可放置获取变量的js代码，且相对来说更好 -->
+ <!--vue的相关操作以及jquery的动效都放置在此处 -->
+ <!--建议将此处的代码移动至body的结束标签之上 -->
+ <!--<script type="text/javascript" src="../static/js/teacher.js"></script> -->
 </html>
+<!-- <script src="../static/js/teacher.js"></script> -->

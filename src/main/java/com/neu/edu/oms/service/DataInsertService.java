@@ -9,5 +9,10 @@ package com.neu.edu.oms.service;
 public interface DataInsertService {
 //    插入学生数据
     int StudentInsert(int num);
+    //插入扫描试卷数据
     int PaperScanInsert();
+    //插入goal和point数据
+    int GoalAndPointInsert();
+    //插入客观题批改信息
+    int ObjMarkInsert();
 }

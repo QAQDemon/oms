@@ -7,7 +7,7 @@ body{
 	font-size: 1em;
 	width: 100%;
 	height: 100%;
-	position: fixed;
+/* 	position: fixed; */
 }
 
 div{
@@ -19,14 +19,14 @@ div{
 /* 两个导航栏的css */
 .header{
 	width: 100%;
-	height: 30px;
-	background-color: hsl(210, 5%, 50%);
-	border-width: 2px;
-	border-color: hsl(210, 5%, 55%);
+	height: 25px;
+	background-color: hsl(210, 5%, 40%);
+	border-width: 1px;
+	border-color: hsl(210, 5%, 45%);
 }
 .funchoose{
 	width: 100%;
-	height: 40px;
+	height: 45px;
 }
 
 /* 主体部分的框架div的css */
@@ -76,12 +76,12 @@ div{
 /* 	background-color: hsla(0, 0%, 35%, 0.2); */
 }
 .classitem{
-	border: 0px;
+	border-top: 1px solid transparent;
 }
 .classbutton{
 	width: 100%;
 	height: 40px;
-	border-radius: 0px;
+	border-radius: 3px;
 }
 .leftfooter{
 	width: 100%;

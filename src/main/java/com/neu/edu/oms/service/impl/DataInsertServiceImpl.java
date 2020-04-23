@@ -1,16 +1,13 @@
 package com.neu.edu.oms.service.impl;
 
-import com.neu.edu.oms.dao.AnswerMapper;
-import com.neu.edu.oms.dao.PaperScanMapper;
-import com.neu.edu.oms.dao.StudentMapper;
-import com.neu.edu.oms.entity.Answer;
-import com.neu.edu.oms.entity.PaperScan;
-import com.neu.edu.oms.entity.Student;
+import com.neu.edu.oms.dao.*;
+import com.neu.edu.oms.entity.*;
 import com.neu.edu.oms.service.DataInsertService;
 import com.neu.edu.oms.utils.RandomValueUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.websocket.PongMessage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +28,20 @@ public class DataInsertServiceImpl implements DataInsertService {
     @Resource
     PaperScanMapper paperScanMapper;
 
+    @Resource
+    SubjectMapper subjectMapper;
+
+    @Resource
+    GoalMapper goalMapper;
+
+    @Resource
+    PointMapper pointMapper;
+
+    @Resource
+    ObjMarkMapper objMarkMapper;
+
+    @Resource
+    SubjMarkMapper subjMarkMapper;
 
     @Override
     public int StudentInsert(int num) {
@@ -49,6 +60,50 @@ public class DataInsertServiceImpl implements DataInsertService {
         }
         return 1;
     }
+
+    @Override
+    public int GoalAndPointInsert(){
+        List<Subject> subjects = subjectMapper.selectAll();
+        Goal goal;
+        Point point;
+        for(Subject subject:subjects){
+            for(int i=0; i<6; i++){
+                goal = new Goal(null, subject.getSubjectId(), subject.getSubjectName(), subject.getSubjectName()+"目标"+(i+1), null, null);
+                point = new Point(null, subject.getSubjectId(), subject.getSubjectName(), subject.getSubjectName()+"得分点"+(i+1), null, null);
+                goalMapper.insert(goal);
+                pointMapper.insert(point);
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public int ObjMarkInsert(){
+        List<PaperScan> paperScans = paperScanMapper.getAllPaperScan();
+        for (PaperScan paperScan:paperScans){
+            Answer answer = answerMapper.selectByPrimaryKey(paperScan.getAnswerId());
+            int num = answer.getObjNum();
+            int subid = answer.getSubjectId();
+            for(int i=0; i<num; i++){
+                ObjMark objMark = new ObjMark();
+                objMark.setPaperSacnId(paperScan.getPaperScanId());
+                objMark.setScore((short)5);
+                Byte flag = (byte)(Math.random()+0.74);
+                objMark.setIsRight(flag);
+                if(flag == 1){
+                    objMark.setScoreGet((short)5);
+                }else {
+                    objMark.setScoreGet((short)0);
+                }
+                objMark.setGoalId((int)(Math.random()*6+(subid-1)*6+1));
+                objMark.setPointId((int)(Math.random()*6+(subid-1)*6+1));
+                objMark.setQuestionNum((short)(i+1));
+                objMarkMapper.insert(objMark);
+            }
+        }
+        return 1;
+    }
+
 
     /*
      * @Author zongyinxiao

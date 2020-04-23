@@ -23,6 +23,8 @@ public class Class {
 
     private Integer subjectId;
 
+    private Integer subjectName;
+
     private List<Answer> answers;
 
     public Class(Integer classId, Short classYear, Byte classNum, String className, Short studentNum, String college, String reserve1, String reserve2) {
@@ -126,5 +128,13 @@ public class Class {
 
     public void setSubjectId(Integer teachSubjectId) {
         this.subjectId = teachSubjectId;
+    }
+
+    public Integer getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(Integer subjectName) {
+        this.subjectName = subjectName;
     }
 }

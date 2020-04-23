@@ -281,4 +281,9 @@
     select paper_scan_id from paper_scan
     where answer_id = #{answerId,jdbcType=INTEGER} and subject_id = #{subjectId,jdbcType=INTEGER} and student_id = #{studentId,jdbcType=INTEGER}
   </select>
+   <!--选取出所有的papersacn-->
+    <select id="getAllPaperScan" resultMap="BaseResultMap">
+        select *
+        from paper_scan
+    </select>
 </mapper>

@@ -41,10 +41,6 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
             List<Integer> answerIdList = paperScanMapper.getanswerIdListBystudentIdAndsubjectId(studentIdMap);
             studentIdMap.clear();
             class1.setAnswers(answerMapper.getAnswerListByanswerIdList(answerIdList));
-//            for(Answer answer:class1.getAnswers()){
-//                System.out.println(answer.getAnswerId());
-//                System.out.println(answer.getAnswerName());
-//            }
         }
         return classList;
     }
