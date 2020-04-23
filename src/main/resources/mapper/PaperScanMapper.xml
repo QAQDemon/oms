@@ -288,7 +288,7 @@
         from paper_scan
     </select>
     <!--通过学生id和试卷id选出相应的扫描试卷-->
-    <select id="getPaperScanBystudentIdAndanswerId" resultType="BaseResultMap">
+    <select id="getPaperScanBystudentIdAndanswerId" resultMap="BaseResultMap">
         select *
         from paper_scan
         where student_id = #{studentId}
