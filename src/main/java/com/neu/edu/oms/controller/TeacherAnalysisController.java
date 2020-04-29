@@ -1,6 +1,8 @@
 package com.neu.edu.oms.controller;
 
+import com.google.gson.Gson;
 import com.neu.edu.oms.entity.Class;
+import com.neu.edu.oms.entity.PaperScanFull;
 import com.neu.edu.oms.service.DataInsertService;
 import com.neu.edu.oms.service.TeacherAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,10 @@ import java.util.List;
 public class TeacherAnalysisController {
 
     @Autowired
-    DataInsertService dataInsertService;
+    private DataInsertService dataInsertService;
 
     @Autowired
-    TeacherAnalysisService teacherAnalysisService;
+    private TeacherAnalysisService teacherAnalysisService;
 
     @RequestMapping("/insertstudent")
     public String insertstudent(){
@@ -58,6 +60,16 @@ public class TeacherAnalysisController {
         List<Class> classList =  teacherAnalysisService.getClassAndAnswerByTeacherId(1);
         model.addAttribute("classes", classList);
         return "Teacher";
+    }
+
+    @RequestMapping("/getscore")
+    @ResponseBody
+    public String getscoretest1(Integer classId, Integer answerId){
+        List<PaperScanFull> paperScanFullList = teacherAnalysisService.getAllpapers(classId, answerId);
+        Gson gson = new Gson();
+        String paperScanListjson = gson.toJson(paperScanFullList);
+        System.out.println(paperScanListjson);
+        return paperScanListjson;
     }
 
     @ResponseBody

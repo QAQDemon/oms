@@ -159,7 +159,7 @@ div{
 .score,th,td{
 	border:1px solid black;
 	border-collapse: collapse;
-	background-color: hsl(30,100%, 70%);
+/* 	background-color: hsl(30,100%, 70%); */
 	font-weight: 800;
 	color: white;
 	text-align:center;
@@ -168,19 +168,22 @@ div{
 /* 	margin-top: 40px; */
 	margin: 0px auto;
 }
+tr{
+	background-color: hsl(30,100%, 80%);
+}
 th{
-	padding: 5px 60px;
+	padding: 5px 5px;
 }
 tr:hover{
 	background-color: hsl(30,100%, 50%);
 }
 
 td:hover{
-	background-color: hsl(30,100%, 30%);
+	background-color: hsl(30,100%, 40%);
 }
 
 td{
-	padding: 5px 10px;
+	padding: 5px 5px;
 }
 caption{
 	caption-side: top;

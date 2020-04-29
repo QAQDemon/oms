@@ -11,13 +11,14 @@
 	<script src="../static/bootstrap/js/bootstrap.js" th:src="@{/static/bootstrap/js/bootstrap.js}"></script>
 	<script src="../static/js/vue.js" th:src="@{/static/js/vue.js}"></script>
 	<script src="../static/js/jquery-1.8.3.min.js" th:src="@{/static/js/jquery-1.8.3.min.js}"></script>
+	<script src="../static/js/jquery-1.8.3.js" th:src="@{/static/js/jquery-1.8.3.js}"></script>
 
 	<!-- 获取变量的js代码 -->
 	<script th:inline="javascript">
 		var classlist = [[${classes}]];
 		// alert(typeof(classes));
 		console.log(classlist);
-		console.log(typeof(classeslist));
+		// console.log(typeof(classeslist));
 		// alert(1);
 	</script>
 <!-- 	<script src="../static/js/teacher.js"></script> -->
@@ -55,16 +56,14 @@
 					</div>
 				</div>
 				<div class="classall" id="classall">
-					<div class="dropdown classitem" v-for="class1 in classes">
+					<div class="dropdown classitem" v-for="class1 in classes" :value="class1.classId">
 						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						{{class1.className}}
 						<span class="caret"></span>
-						<br><span> 哈哈</span>
 						</button>
+						<input type="hidden" :value="class1.classId"/>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li class="active" v-for="answer in class1.answers"><a href="javascript:void(0)">{{answer.answerName}}</a></li>
-							<li><a href="javascript:void(0)">Another action</a></li>
-							<li><a href="javascript:void(0)">Something else here</a></li>
+							<li class="answeritem" v-for="answer in class1.answers" :key="answer.answerId" :value="answer.answerId"><a href="javascript:void(0)">{{answer.answerName}}</a></li>
 						</ul>
 					</div>
 					<div class="dropdown classitem">
@@ -124,139 +123,43 @@
 										<caption>成绩表格</caption>
 										<thead class="scorehead">
 											<tr>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
-												<th>表头</th>
+												<th>姓名</th>
+												<th>学号</th>
+												<th v-for="item in paperscans[0].objMarks">{{item.questionNum}}</th>
+												<th v-for="item in paperscans[0].subjScores">{{item.questionNum}}</th>
+												<th>客观题得分</th>
+												<th>客观题得分率</th>
+												<th>主观题得分</th>
+												<th>主观题得分率</th>
+												<th>总分</th>
+												<th>得分率</th>
 											</tr>
 										</thead>
 										<tbody class="scorebody">
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
+											<tr v-for="(paperscan, i) in paperscans" v-if="paperscan.paperScanId">
+												<td>{{paperscan.studentName}}</td>
+												<td>{{paperscan.studentId}}</td>
+												<td v-for="objMark in paperscan.objMarks">{{objMark.scoreGet}}</td>
+												<td v-for="subjScore in paperscan.subjScores">{{subjScore.scoreGet}}</td>
+												<td>{{paperscan.objGet}}</td>
+												<td>{{paperscan.objGet}}/{{paperscan.objAll}}</td>
+												<td>{{paperscan.subjGet}}</td>
+												<td>{{paperscan.subjGet}}/{{paperscan.subjAll}}</td>
+												<td>{{paperscan.scoreGet}}</td>
+												<td>{{paperscan.scoreGet}}/{{paperscan.score}}</td>
 											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
-											<tr>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-												<td>表格项</td>
-											</tr>
+											<tr v-for="(paperscan, i) in paperscans" v-if="!paperscan.paperScanId">
+												<td>{{paperscan.studentName}}</td>
+												<td>{{paperscan.studentId}}</td>
+												<th v-for="item in paperscans[0].objMarks">0</th>
+												<th v-for="item in paperscans[0].subjScores">0</th>
+												<td>0</td>
+												<td>0</td>
+												<td>0</td>
+												<td>0</td>
+												<td>0</td>
+												<td>0</td>
+											</tr>											
 										</tbody>
 									</table>
 								</div>
@@ -311,8 +214,10 @@
 		</div>
 	</div>
 	<!-- 即此处，更好 -->
+<!-- 	<script src="../static/js/teacher.js" th:src="@{/static/js/teachervue.js}"></script> -->
+	<script src="../static/js/teachervue.js" th:src="@{/static/js/teachervue.js}"></script>
 	<script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}"></script>
-</body>
+</body>teachervue
 <!-- <script src="../static/js/teacher.js"></script> -->
 <!-- <script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}></script> -->
  <!--此处也可放置获取变量的js代码，且相对来说更好 -->

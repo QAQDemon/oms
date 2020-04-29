@@ -5,6 +5,7 @@ import com.neu.edu.oms.entity.PaperScan;
 import com.neu.edu.oms.entity.PaperScanFull;
 import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,5 @@ public interface PaperScanMapper {
     //选取出所有的扫描试卷
     List<PaperScan> getAllPaperScan();
     //通过学生id和试卷id选出相应的扫描试卷,此处填写paperscanfull尝试一下
-    PaperScan getPaperScanBystudentIdAndanswerId(Integer studentId, Integer answerId);
+    PaperScan getPaperScanBystudentIdAndanswerId(@Param("studentId") Integer studentId, @Param("answerId") Integer answerId);
 }

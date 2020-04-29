@@ -121,12 +121,16 @@ public class DataInsertServiceImpl implements DataInsertService {
                 subjMark.setGoalId((int)(Math.random()*6+(subid-1)*6+1));
                 subjMark.setPointId((int)(Math.random()*6+(subid-1)*6+1));
                 subjMark.setTeacherId((int)(Math.random()*5+1));
-                int scorerandom = (int)(Math.random()*20);
+                int scorerandom = (int)(Math.random()*30);
                 if(scorerandom <10){
                     scoreget = scorerandom;
                 }else if(scorerandom < 15){
                     scoreget = scorerandom-5;
-                }else if(scorerandom < 17){
+                }else if(scorerandom < 20){
+                    scoreget = scorerandom-10;
+                } else if(scorerandom < 23){
+                    scoreget = scorerandom-13;
+                }else if(scorerandom < 26){
                     scoreget = 0;
                 }else{
                     scoreget = 10;

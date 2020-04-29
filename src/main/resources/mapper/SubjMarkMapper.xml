@@ -193,5 +193,6 @@
         select *
         from subj_mark
         where paper_scan_id = #{paperScanId,jdbcType=INTEGER}
+        order by question_num asc
     </select>
 </mapper>

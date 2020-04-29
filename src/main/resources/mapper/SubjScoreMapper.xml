@@ -182,5 +182,6 @@
         select *
         from subj_score
         where paper_scan_id = #{paperScanId,jdbcType=INTEGER}
+        order by question_num asc
     </select>
 </mapper>

@@ -48,7 +48,11 @@ public class PaperScanFull {
 
     private List<ObjMark> objMarks;
 
-    private List<SubjMark> subjMarks;
+    private List<SubjScore> subjScores;
+
+    private Short objnum;
+
+    private Short subjnum;
 
     public PaperScanFull(Integer paperScanId, Integer studentId, Integer answerId, String paperName, Integer studentExamNum, String barCode, Integer subjectId, Date submitTime, String addressPrefix, Byte isAssign, Byte isMark, Integer objGet, Integer objAll, Integer subjGet, Integer subjAll, Integer scoreGet, Integer score, String reserve1, String reserve2) {
         this.paperScanId = paperScanId;
@@ -274,11 +278,27 @@ public class PaperScanFull {
         this.objMarks = objMarks;
     }
 
-    public List<SubjMark> getSubjMarks() {
-        return subjMarks;
+    public List<SubjScore> getSubjScores() {
+        return subjScores;
     }
 
-    public void setSubjMarks(List<SubjMark> subjMarks) {
-        this.subjMarks = subjMarks;
+    public void setSubjScores(List<SubjScore> subjScores) {
+        this.subjScores = subjScores;
+    }
+
+    public Short getObjnum() {
+        return objnum;
+    }
+
+    public void setObjnum(Short objnum) {
+        this.objnum = objnum;
+    }
+
+    public Short getSubjnum() {
+        return subjnum;
+    }
+
+    public void setSubjnum(Short subjnum) {
+        this.subjnum = subjnum;
     }
 }

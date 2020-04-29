@@ -163,5 +163,6 @@
       select *
       from obj_mark
       where paper_sacn_id = #{paperScanId,jdbcType=INTEGER}
+      order by question_num asc
   </select>
 </mapper>
