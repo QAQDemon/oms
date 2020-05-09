@@ -104,16 +104,19 @@ div{
 	float: left;
 	width: 50%;
 	height: 100%;
+/* 	-webkit-transition:width 2s; */
 }
 .bodycenter{
 	float: left;
 	width: 30%;
 	height: 100%;
+/* 	-webkit-transition:width 2s; */
 }
 .bodyright{
 	float: left;
 	width: 20%;
 	height: 100%;
+/* 	-webkit-transition:width 2s; */
 }
 
 
@@ -164,6 +167,10 @@ div{
 	color: white;
 	text-align:center;
 }
+
+/*table{*/
+    /*table-layout:fixed;*/
+/*}*/
 .score{
 /* 	margin-top: 40px; */
 	margin: 0px auto;
@@ -171,9 +178,9 @@ div{
 tr{
 	background-color: hsl(30,100%, 80%);
 }
-th{
+/* th{
 	padding: 5px 5px;
-}
+} */
 tr:hover{
 	background-color: hsl(30,100%, 50%);
 }
@@ -181,10 +188,32 @@ tr:hover{
 td:hover{
 	background-color: hsl(30,100%, 40%);
 }
-
+.nameth{
+    min-width: 70px;
+}
+.numth{
+    min-width: 70px;
+}
 td{
 	padding: 5px 5px;
 }
+th{
+	padding: 5px 5px;
+}
+/*th,td{*/
+    /*width: 200px;*/
+/*}*/
+/*table{*/
+    /*min-width: 100%;*/
+/*}*/
+/*td{*/
+    /*min-width: 70px;*/
+/*}*/
+/*.table-container{*/
+    /*overflow:auto;*/
+    /*display: block;*/
+/*}*/
+
 caption{
 	caption-side: top;
 	text-align: center;

@@ -40,14 +40,15 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
         Map<String, Object> studentIdMap = new HashMap<String, Object>();
         for(Class class1:classList){
             List<Integer> studentIdList = studentMapper.getStudentIdListByclassId(class1.getClassId());
-//            System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
             studentIdMap.put("studentIdList", studentIdList);
             studentIdMap.put("subjectId", class1.getSubjectId());
-            //此处调用的方法最好加上一个判断条件是已经批改完的
             List<Integer> answerIdList = paperScanMapper.getanswerIdListBystudentIdAndsubjectId(studentIdMap);
-
             studentIdMap.clear();
-            class1.setAnswers(answerMapper.getAnswerListByanswerIdList(answerIdList));
+            if(answerIdList.size() == 0){
+                class1.setAnswers(null);
+            }else {
+                class1.setAnswers(answerMapper.getAnswerListByanswerIdList(answerIdList));
+            }
         }
         return classList;
     }
@@ -101,6 +102,29 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
         }
         return paperScanFullList;
     }
+
+    public List<PaperScanFull> getpapersByanswerId(Integer answerId){
+        Answer answer = answerMapper.selectByPrimaryKey(answerId);
+        List<PaperScanFull> paperScanFullList = new ArrayList<PaperScanFull>();
+        List<PaperScan> paperScanList = paperScanMapper.getPaperScanListByanswerId(answerId);
+        for(PaperScan paperScan:paperScanList){
+            PaperScanFull paperScanFull = new PaperScanFull(paperScan);
+            paperScanFull.setObjMarks(objMarkMapper.getObjMarkListBypaperScanId(paperScan.getPaperScanId()));
+            paperScanFull.setSubjScores(getSubScoreList(paperScan.getPaperScanId()));
+            paperScanFull = calculatescore(paperScanFull);
+            paperScanFull.setObjnum(answer.getObjNum());
+            paperScanFull.setSubjnum(answer.getSubjNum());
+            paperScanFullList.add(paperScanFull);
+        }
+        System.out.println(paperScanFullList.size());
+        return paperScanFullList;
+    }
+
+//数据分析部分
+
+
+
+
 
     private List<SubjScore> getSubScoreList(Integer paperScanId){
         List<SubjScore> subjScoreList =  subjScoreMapper.getSubjScoreListBypaperScanId(paperScanId);

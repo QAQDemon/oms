@@ -295,4 +295,10 @@
         and answer_id = #{answerId}
         and is_mark = 1
     </select>
+
+    <select id="getPaperScanListByanswerId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+        select *
+        from paper_scan
+        where answer_id=#{answerId,jdbcType=INTEGER}
+    </select>
 </mapper>

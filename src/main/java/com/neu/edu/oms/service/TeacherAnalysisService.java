@@ -10,4 +10,6 @@ public interface TeacherAnalysisService {
     List<Class> getClassAndAnswerByTeacherId(Integer teacherId);
     //选取相应班级所有学生某一次考试的成绩
     List<PaperScanFull> getAllpapers(Integer classId, Integer answerId);
+
+    List<PaperScanFull> getpapersByanswerId(Integer answerId);
 }

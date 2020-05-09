@@ -31,4 +31,12 @@ public class TeacherTestController {
         System.out.println(classId+"WWWWWWWWWWWWWWWWWWWWWWWWW"+answerId);
         return "xiaozongyin";
     }
+
+    @RequestMapping("/getpapers")
+    @ResponseBody
+    public String getpapers(){
+        teacherAnalysisService.getpapersByanswerId(1);
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWW");
+        return "success";
+    }
 }

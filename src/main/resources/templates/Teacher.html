@@ -12,12 +12,17 @@
 	<script src="../static/js/vue.js" th:src="@{/static/js/vue.js}"></script>
 	<script src="../static/js/jquery-1.8.3.min.js" th:src="@{/static/js/jquery-1.8.3.min.js}"></script>
 	<script src="../static/js/jquery-1.8.3.js" th:src="@{/static/js/jquery-1.8.3.js}"></script>
-
+<!-- 	<script src="../static/echarts/echarts.all.js" th:src="@{/static/echarts/echarts.all.js}"></script> -->
+<!-- 	<script src="../static/js/echarts.js" th:src="@{/static/js/echarts.js}"></script> -->
+	<script src="../static/echarts/echarts.js" th:src="@{/static/echarts/echarts.js}"></script>
 	<!-- 获取变量的js代码 -->
 	<script th:inline="javascript">
 		var classlist = [[${classes}]];
+		var teachyears = [[${teachyears}]]
 		// alert(typeof(classes));
 		console.log(classlist);
+		console.log(teachyears);
+		
 		// console.log(typeof(classeslist));
 		// alert(1);
 	</script>
@@ -36,17 +41,14 @@
 			<div class="mainleft" id="mainleft">
 				<div class="choose">
 					<div class="yearchose " id="yearchose">
-						<select class="form-control">
-						  <option value="">1</option>
-						  <option value="">待选值</option>
-						  <option value="">待选值</option>
-						  <option value="">待选值</option>
-						  <option value="">待选值</option>
+						<select class="form-control" v-model="selected">
+						  <option value="">选择教学年份</option>
+						  <option v-for="year in years" :value="year">{{year}}</option>
 						</select>
 					</div>
 					<div class="search">
 						<div class="input-group ">
-						      <input type="text" class="form-control" placeholder="输入相关信息">
+						      <input type="text" class="form-control" placeholder="输入相关信息" v-model="searchword">
 						      <span class="input-group-btn">
 						        <button class="btn btn-primary" type="button" >
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -56,7 +58,7 @@
 					</div>
 				</div>
 				<div class="classall" id="classall">
-					<div class="dropdown classitem" v-for="class1 in classes" :value="class1.classId">
+					<div class="dropdown classitem" v-for="class1 in search(selected ,searchword)" :value="class1.classId">
 						<button class="btn btn-primary dropdown-toggle classbutton" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						{{class1.className}}
 						<span class="caret"></span>
@@ -110,7 +112,7 @@
 							<div class="tablediv" id="tablediv">
 								<div class="tablesearch" id="tablesearch">
 									<div class="input-group ">
-									      <input type="text" class="form-control" placeholder="输入学号或姓名">
+									      <input type="text" class="form-control" placeholder= "输入学号或姓名 "  v-model="searchword">
 									      <span class="input-group-btn">
 									        <button class="btn btn-primary" type="button" style="width: 60px;">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -123,8 +125,8 @@
 										<caption>成绩表格</caption>
 										<thead class="scorehead">
 											<tr>
-												<th>姓名</th>
-												<th>学号</th>
+												<th class="nameth">姓名</th>
+												<th class="numth">学号</th>
 												<th v-for="item in paperscans[0].objMarks">{{item.questionNum}}</th>
 												<th v-for="item in paperscans[0].subjScores">{{item.questionNum}}</th>
 												<th>客观题得分</th>
@@ -136,9 +138,9 @@
 											</tr>
 										</thead>
 										<tbody class="scorebody">
-											<tr v-for="(paperscan, i) in paperscans" v-if="paperscan.paperScanId">
-												<td>{{paperscan.studentName}}</td>
-												<td>{{paperscan.studentId}}</td>
+											<tr v-for="(paperscan, i) in search(searchword)" v-if="paperscan.paperScanId">
+												<td class="nameth">{{paperscan.studentName}}</td>
+												<td class="nameth">{{paperscan.studentId}}</td>
 												<td v-for="objMark in paperscan.objMarks">{{objMark.scoreGet}}</td>
 												<td v-for="subjScore in paperscan.subjScores">{{subjScore.scoreGet}}</td>
 												<td>{{paperscan.objGet}}</td>
@@ -148,9 +150,9 @@
 												<td>{{paperscan.scoreGet}}</td>
 												<td>{{paperscan.scoreGet}}/{{paperscan.score}}</td>
 											</tr>
-											<tr v-for="(paperscan, i) in paperscans" v-if="!paperscan.paperScanId">
-												<td>{{paperscan.studentName}}</td>
-												<td>{{paperscan.studentId}}</td>
+											<tr v-for="(paperscan, i) in search(searchword)" v-if="!paperscan.paperScanId">
+												<td class="nameth">{{paperscan.studentName}}</td>
+												<td class="numth">{{paperscan.studentId}}</td>
 												<th v-for="item in paperscans[0].objMarks">0</th>
 												<th v-for="item in paperscans[0].subjScores">0</th>
 												<td>0</td>
@@ -167,11 +169,11 @@
 						</div>
 						<div class="mainfooter tablefooter" id="tablefooter">
 							<div class="slide" id="slide">
-								<button type="button" class="btn btn-info slideleft">
+								<button type="button" class="btn btn-info slideleft" id="tableleft">
 									<span class="glyphicon glyphicon-step-backward"></span>
 								</button>
-								<button type="button" class="btn btn-info slideright">
-									<span class="glyphicon glyphicon-step-forward"></span>
+								<button type="button" class="btn btn-info slideright" id="tableright">
+									<span class="glyphicon glyphicon-step-forward" id="tablerightspan"></span>
 								</button>
 							</div>
 						</div>
@@ -181,14 +183,38 @@
 							mainbody中的bodycenter中的mainheader，chartheader
 						</div>
 						<div class="maincenter chartcenter" id="chartcenter" style="overflow: auto;">
-							<div style="width: 700px; background-color: red;height: 100px;"></div>
+<!-- 							<div style="width: 700px; background-color: red;height: 100px;"></div> -->
+							<div class="panel panel-info">
+							  <div class="panel-heading">
+							    <h3 class="panel-title">成绩分段表</h3>
+							  </div>
+							  <div class="panel-body" id="scorebar" style="overflow-x: auto; padding: 0px;">
+								  <div id="scorebarchart" style="width: 200px; height: 200px;"></div>
+							  </div>
+							</div>
+							<div class="panel panel-info">
+							  <div class="panel-heading">
+							    <h3 class="panel-title">成绩分段表</h3>
+							  </div>
+							  <div class="panel-body">
+							    Panel content
+							  </div>
+							</div>
+							<div class="panel panel-info">
+							  <div class="panel-heading">
+							    <h3 class="panel-title">成绩分段表</h3>
+							  </div>
+							  <div class="panel-body">
+							    Panel content
+							  </div>
+							</div>
 						</div>
 						<div class="mainfooter chartfooter" id="chartfooter">
 							<div class="slide" id="slide">
-								<button type="button" class="btn btn-info slideleft">
+								<button type="button" class="btn btn-info slideleft" id="chartleft">
 									<span class="glyphicon glyphicon-step-backward"></span>
 								</button>
-								<button type="button" class="btn btn-info slideright">
+								<button type="button" class="btn btn-info slideright" id="chartright">
 									<span class="glyphicon glyphicon-step-forward"></span>
 								</button>
 							</div>
@@ -203,7 +229,7 @@
 						</div>
 						<div class="mainfooter describefooter" id="describefooter">
 							<div class="slide" id="slide">
-								<button type="button" class="btn btn-info slideleft">
+								<button type="button" class="btn btn-info slideleft" id="describeleft">
 									<span class="glyphicon glyphicon-step-backward"></span>
 								</button>
 							</div>
@@ -217,7 +243,7 @@
 <!-- 	<script src="../static/js/teacher.js" th:src="@{/static/js/teachervue.js}"></script> -->
 	<script src="../static/js/teachervue.js" th:src="@{/static/js/teachervue.js}"></script>
 	<script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}"></script>
-</body>teachervue
+</body>
 <!-- <script src="../static/js/teacher.js"></script> -->
 <!-- <script src="../static/js/teacher.js" th:src="@{/static/js/teacher.js}></script> -->
  <!--此处也可放置获取变量的js代码，且相对来说更好 -->

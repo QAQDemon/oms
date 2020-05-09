@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.nio.channels.ClosedSelectorException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -58,7 +61,14 @@ public class TeacherAnalysisController {
     @RequestMapping("/test")
     public String test(Model model){
         List<Class> classList =  teacherAnalysisService.getClassAndAnswerByTeacherId(1);
+        HashSet<Integer> teacheryearsset = new HashSet();
+        List<Integer> teacheryearslist = new ArrayList<Integer>();
+        for(Class class1:classList){
+            teacheryearsset.add(class1.getTeachYear());
+        }
+        teacheryearslist.addAll(teacheryearsset);
         model.addAttribute("classes", classList);
+        model.addAttribute("teachyears", teacheryearslist);
         return "Teacher";
     }
 

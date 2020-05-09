@@ -34,4 +34,6 @@ public interface PaperScanMapper {
     List<PaperScan> getAllPaperScan();
     //通过学生id和试卷id选出相应的扫描试卷,此处填写paperscanfull尝试一下
     PaperScan getPaperScanBystudentIdAndanswerId(@Param("studentId") Integer studentId, @Param("answerId") Integer answerId);
+    //
+    List<PaperScan> getPaperScanListByanswerId(Integer answerId);
 }
