@@ -301,4 +301,9 @@
         from paper_scan
         where answer_id=#{answerId,jdbcType=INTEGER}
     </select>
+    <select id="getPaperScanListBystudentId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+        select *
+        from paper_scan
+        where student_id=#{studentId,jdbcType=INTEGER}
+    </select>
 </mapper>

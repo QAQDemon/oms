@@ -44,6 +44,9 @@ public class DataInsertServiceImpl implements DataInsertService {
     @Resource
     SubjMarkMapper subjMarkMapper;
 
+    @Resource
+    SubjScoreMapper subjScoreMapper;
+
     @Override
     public int StudentInsert(int num) {
         List<Student> students = CreateStudentList(num);
@@ -142,6 +145,117 @@ public class DataInsertServiceImpl implements DataInsertService {
         return 1;
     }
 
+    @Override
+    public int scoreadd(Integer classId, Integer answerId){
+        if(answerId == 0){
+            List<Integer> studentIds = studentMapper.getStudentIdListByclassId(classId);
+            for(Integer studentId:studentIds){
+                List<PaperScan> paperScans = paperScanMapper.getPaperScanListBystudentId(studentId);
+                for(PaperScan paperScan:paperScans){
+                    List<ObjMark> objMarks = objMarkMapper.getObjMarkListBypaperScanId(paperScan.getPaperScanId());
+                    for(ObjMark objMark:objMarks){
+                        if(objMark.getScoreGet() == 0){
+                            if(Math.random() > 0.8){
+                                objMark.setScoreGet(objMark.getScore());
+                                objMarkMapper.updateByPrimaryKey(objMark);
+                            }
+                        }else{
+                            continue;
+                        }
+                    }
+                    List<SubjScore> subjScores = subjScoreMapper.getSubjScoreListBypaperScanId(paperScan.getPaperScanId());
+                    for(SubjScore subjScore:subjScores){
+                        if(subjScore.getScoreGet() < 7){
+                            subjScore.setScoreGet((short)(subjScore.getScoreGet()+1));
+                            subjScoreMapper.updateByPrimaryKey(subjScore);
+                        }
+                    }
+                }
+            }
+        }else{
+            List<Integer> studentIds = studentMapper.getStudentIdListByclassId(classId);
+            for(Integer studentId:studentIds){
+                PaperScan paperScan = paperScanMapper.getPaperScanBystudentIdAndanswerId(studentId, answerId);
+                if(paperScan != null){
+                    List<ObjMark> objMarks = objMarkMapper.getObjMarkListBypaperScanId(paperScan.getPaperScanId());
+                    for(ObjMark objMark:objMarks){
+                        if(objMark.getScoreGet() == 0){
+                            if(Math.random() > 0.7){
+                                objMark.setScoreGet(objMark.getScore());
+                                objMarkMapper.updateByPrimaryKey(objMark);
+                            }
+                        }else{
+                            continue;
+                        }
+                    }
+                    List<SubjScore> subjScores = subjScoreMapper.getSubjScoreListBypaperScanId(paperScan.getPaperScanId());
+                    for(SubjScore subjScore:subjScores){
+                        if(subjScore.getScoreGet() < 5){
+                            subjScore.setScoreGet((short)(subjScore.getScoreGet()+2));
+                            subjScoreMapper.updateByPrimaryKey(subjScore);
+                        }
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public int scorecut(Integer classId, Integer answerId){
+        if(answerId == 0){
+            List<Integer> studentIds = studentMapper.getStudentIdListByclassId(classId);
+            for(Integer studentId:studentIds){
+                List<PaperScan> paperScans = paperScanMapper.getPaperScanListBystudentId(studentId);
+                for(PaperScan paperScan:paperScans){
+                    List<ObjMark> objMarks = objMarkMapper.getObjMarkListBypaperScanId(paperScan.getPaperScanId());
+                    for(ObjMark objMark:objMarks){
+                        if(objMark.getScoreGet() == objMark.getScore()){
+                            if(Math.random() > 0.8){
+                                objMark.setScoreGet((short)0);
+                                objMarkMapper.updateByPrimaryKey(objMark);
+                            }
+                        }else{
+                            continue;
+                        }
+                    }
+                    List<SubjScore> subjScores = subjScoreMapper.getSubjScoreListBypaperScanId(paperScan.getPaperScanId());
+                    for(SubjScore subjScore:subjScores){
+                        if(subjScore.getScoreGet() > 7){
+                            subjScore.setScoreGet((short)(subjScore.getScoreGet()-1));
+                            subjScoreMapper.updateByPrimaryKey(subjScore);
+                        }
+                    }
+                }
+            }
+        }else{
+            List<Integer> studentIds = studentMapper.getStudentIdListByclassId(classId);
+            for(Integer studentId:studentIds){
+                PaperScan paperScan = paperScanMapper.getPaperScanBystudentIdAndanswerId(studentId, answerId);
+                if(paperScan != null){
+                    List<ObjMark> objMarks = objMarkMapper.getObjMarkListBypaperScanId(paperScan.getPaperScanId());
+                    for(ObjMark objMark:objMarks){
+                        if(objMark.getScoreGet() == objMark.getScore()){
+                            if(Math.random() > 0.7){
+                                objMark.setScoreGet((short)0);
+                                objMarkMapper.updateByPrimaryKey(objMark);
+                            }
+                        }else{
+                            continue;
+                        }
+                    }
+                    List<SubjScore> subjScores = subjScoreMapper.getSubjScoreListBypaperScanId(paperScan.getPaperScanId());
+                    for(SubjScore subjScore:subjScores){
+                        if(subjScore.getScoreGet() > 6){
+                            subjScore.setScoreGet((short)(subjScore.getScoreGet()-1));
+                            subjScoreMapper.updateByPrimaryKey(subjScore);
+                        }
+                    }
+                }
+            }
+        }
+        return 1;
+    }
 
     /*
      * @Author zongyinxiao

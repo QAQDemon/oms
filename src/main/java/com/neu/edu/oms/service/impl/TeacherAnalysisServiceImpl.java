@@ -97,9 +97,9 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
                 return o2.getScoreGet()-o1.getScoreGet();
             }
         });
-        for(PaperScanFull paperScanFull:paperScanFullList){
-            System.out.println(paperScanFull.getScoreGet());
-        }
+//        for(PaperScanFull paperScanFull:paperScanFullList){
+//            System.out.println(paperScanFull.getScoreGet());
+//        }
         return paperScanFullList;
     }
 
@@ -116,11 +116,12 @@ public class TeacherAnalysisServiceImpl implements TeacherAnalysisService {
             paperScanFull.setSubjnum(answer.getSubjNum());
             paperScanFullList.add(paperScanFull);
         }
-        System.out.println(paperScanFullList.size());
+//        System.out.println(paperScanFullList.size());
         return paperScanFullList;
     }
 
 //数据分析部分
+//分数分析时，缺考不计入
 
 
 

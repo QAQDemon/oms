@@ -36,4 +36,6 @@ public interface PaperScanMapper {
     PaperScan getPaperScanBystudentIdAndanswerId(@Param("studentId") Integer studentId, @Param("answerId") Integer answerId);
     //
     List<PaperScan> getPaperScanListByanswerId(Integer answerId);
+
+    List<PaperScan> getPaperScanListBystudentId(Integer studentId);
 }

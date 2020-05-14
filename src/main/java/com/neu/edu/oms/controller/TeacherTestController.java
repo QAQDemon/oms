@@ -39,4 +39,21 @@ public class TeacherTestController {
         System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWW");
         return "success";
     }
+
+    @RequestMapping("/addscore")
+    @ResponseBody
+    public String addscore(){
+        dataInsertService.scoreadd(3,1);
+        dataInsertService.scoreadd(2,0);
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWW");
+        return "success";
+    }
+
+    @RequestMapping("/cutscore")
+    @ResponseBody
+    public String cutscore(){
+        dataInsertService.scorecut(1,0);
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWW");
+        return "success";
+    }
 }

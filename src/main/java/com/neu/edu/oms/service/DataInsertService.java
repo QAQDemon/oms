@@ -17,4 +17,8 @@ public interface DataInsertService {
     int ObjMarkInsert();
     //插入主观题批改信息
     int SubjMarkInsert();
+
+    int scorecut(Integer classId, Integer answerId);
+
+    int scoreadd(Integer classId, Integer answerId);
 }
